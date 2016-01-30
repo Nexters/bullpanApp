@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.chatRoomListActivity"/>
+      <point      
+        x = "3934"      
+        y = "125"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.LoginActivity"/>
+      <point      
+        x = "1961"      
+        y = "128"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.chattingActivity"/>
+      <point      
+        x = "5259"      
+        y = "128"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.UserInfoActivity"/>
+      <point      
+        x = "1095"      
+        y = "2061"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.channelActivity"/>
+      <point      
+        x = "4156"      
+        y = "132"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.SplashActivity"/>
+      <point      
+        x = "64"      
+        y = "87"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.MainActivity"/>
+      <point      
+        x = "3096"      
+        y = "124"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.SignUpActivity"/>
+      <point      
+        x = "2020"      
+        y = "1752"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.chatRoomActivity"/>
+      <point      
+        x = "4070"      
+        y = "135"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.StartActivity"/>
+      <point      
+        x = "1019"      
+        y = "87"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>
