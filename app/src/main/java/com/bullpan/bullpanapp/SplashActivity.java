@@ -42,15 +42,22 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void goToLoginActivity() {
-        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        Intent intent =new Intent(SplashActivity.this, SignInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
     }
 
     private void gotoStartActivity() {
-        startActivity(new Intent(SplashActivity.this, StartActivity.class));
+        Intent intent =new Intent(SplashActivity.this, StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void goToMainActivity() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 
