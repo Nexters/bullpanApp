@@ -10,7 +10,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="prompt_password_confirmation">Retype Password</string>
+    <string name="prompt_password_confirmation">Retype your password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_up_short">Sign Up</string>
     <string name="action_sign_up_short_ko">회원가입</string>

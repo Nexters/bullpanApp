@@ -14,14 +14,6 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.bullpan.bullpanapp.chatRoomListActivity"/>
-      <point      
-        x = "3934"      
-        y = "125"/>
-    </statePointEntry>
-    <statePointEntry>
-      <state      
-        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.bullpan.bullpanapp.chattingActivity"/>
       <point      
         x = "5259"      
@@ -30,10 +22,50 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.ChannelActivity"/>
+      <point      
+        x = "4300"      
+        y = "245"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.SignInActivity"/>
+      <point      
+        x = "2103"      
+        y = "132"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.chatRoomActivity"/>
+      <point      
+        x = "4070"      
+        y = "135"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.StartActivity"/>
+      <point      
+        x = "1028"      
+        y = "94"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.bullpan.bullpanapp.chatRoomListActivity"/>
+      <point      
+        x = "3934"      
+        y = "125"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.bullpan.bullpanapp.UserInfoActivity"/>
       <point      
-        x = "4329"      
-        y = "2027"/>
+        x = "4282"      
+        y = "2169"/>
     </statePointEntry>
     <statePointEntry>
       <state      
@@ -49,7 +81,7 @@
         className = "com.bullpan.bullpanapp.MainActivity"/>
       <point      
         x = "3216"      
-        y = "112"/>
+        y = "198"/>
     </statePointEntry>
     <statePointEntry>
       <state      
@@ -70,34 +102,10 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.bullpan.bullpanapp.ChannelActivity"/>
-      <point      
-        x = "4291"      
-        y = "103"/>
-    </statePointEntry>
-    <statePointEntry>
-      <state      
-        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.bullpan.bullpanapp.chatRoomActivity"/>
-      <point      
-        x = "4070"      
-        y = "135"/>
-    </statePointEntry>
-    <statePointEntry>
-      <state      
-        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.bullpan.bullpanapp.ChattingActivity"/>
       <point      
         x = "5461"      
-        y = "84"/>
-    </statePointEntry>
-    <statePointEntry>
-      <state      
-        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.bullpan.bullpanapp.StartActivity"/>
-      <point      
-        x = "980"      
-        y = "75"/>
+        y = "207"/>
     </statePointEntry>
   </locations>
 </navigationModel>

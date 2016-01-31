@@ -11,6 +11,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
         findViewById(R.id.btn_sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
