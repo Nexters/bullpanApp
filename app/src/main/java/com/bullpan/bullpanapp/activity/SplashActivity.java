@@ -1,10 +1,13 @@
-package com.bullpan.bullpanapp;
+package com.bullpan.bullpanapp.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.bullpan.bullpanapp.Constants;
+import com.bullpan.bullpanapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 

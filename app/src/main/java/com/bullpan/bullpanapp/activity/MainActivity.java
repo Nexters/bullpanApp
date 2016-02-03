@@ -1,4 +1,4 @@
-package com.bullpan.bullpanapp;
+package com.bullpan.bullpanapp.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.bullpan.bullpanapp.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

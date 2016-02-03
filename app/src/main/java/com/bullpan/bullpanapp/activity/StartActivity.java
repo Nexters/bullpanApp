@@ -1,9 +1,11 @@
-package com.bullpan.bullpanapp;
+package com.bullpan.bullpanapp.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.bullpan.bullpanapp.R;
 
 public class StartActivity extends AppCompatActivity {
 

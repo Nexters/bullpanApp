@@ -1,7 +1,9 @@
-package com.bullpan.bullpanapp;
+package com.bullpan.bullpanapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.bullpan.bullpanapp.R;
 
 public class UserInfoActivity extends AppCompatActivity {
 
