@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity
     private ChannelListAdapter mListAdapter;
     private List<Channel> mChannels;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -52,20 +52,22 @@ public class MainActivity extends AppCompatActivity
     private void initResources() {
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //우선적으로 처리해야 함
+        setSupportActionBar(toolbar);
+        setupActionBar();
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mChannelListView = (ListView) findViewById(android.R.id.list);
-
         mChannels = new ArrayList<Channel>();
         mListAdapter = new ChannelListAdapter(this, mChannels);
     }
 
     private void initEvents() {
-        setSupportActionBar(toolbar);
-        setupActionBar();
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +77,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
         navigationView.setNavigationItemSelectedListener(this);
-        findViewById(R.id.drawer_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ChannelActivity.class));
-            }
-        });
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mChannelListView.setAdapter(mListAdapter);
         mSwipeRefreshLayout.post(new Runnable() {
@@ -94,6 +89,15 @@ public class MainActivity extends AppCompatActivity
                                      }
                                  }
         );
+        mChannelListView.setOnItemClickListener( new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Channel item  = (Channel) parent.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, ChannelActivity.class);
+                intent.putExtra("channelName", item.getName());
+                startActivity(intent);
+            }
+        });
     }
 
     private void fetchChannels() {

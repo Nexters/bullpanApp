@@ -1,7 +1,5 @@
 package com.bullpan.bullpanapp.model;
 
-import android.text.format.DateUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -9,7 +7,7 @@ import java.util.Locale;
  * Created by daehyun on 16. 2. 3..
  */
 public class Channel {
-    private String title;
+    private String name;
     private int logoImageId;
     private String currentProgramTitle;
     private String currentDuration;
@@ -17,19 +15,19 @@ public class Channel {
     private Program mCurrentProgram;
 
     public Channel(String title, int logoImageId, Program currentProgram, int channelHitCount) {
-        this.title = title;
+        this.name = title;
         this.logoImageId = logoImageId;
         mCurrentProgram = currentProgram;
         this.channelHitCount = channelHitCount;
     }
 
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getLogoImageId() {
