@@ -10,6 +10,14 @@ public class Program {
     private String programlInfo;
     private Date startTime;
     private Date endTime;
+
+    public Program(String title, String programlInfo, Date startTime, Date endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.programlInfo = programlInfo;
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }

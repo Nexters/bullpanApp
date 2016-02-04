@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,21 +16,58 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
+import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
+import com.bullpan.bullpanapp.model.Channel;
+import com.bullpan.bullpanapp.model.Program;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout mSwipeRefreshLayout;
+    FloatingActionButton fab;
+    ListView mChannelListView;
+    DrawerLayout drawer;
+    Toolbar toolbar;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
+    private ChannelListAdapter mListAdapter;
+    private List<Channel> mChannels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        initResources();
+        initEvents();
+
+
+    }
+
+    private void initResources() {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mChannelListView = (ListView) findViewById(android.R.id.list);
+
+        mChannels = new ArrayList<Channel>();
+        mListAdapter = new ChannelListAdapter(this, mChannels);
+    }
+
+    private void initEvents() {
         setSupportActionBar(toolbar);
         setupActionBar();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,13 +76,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         findViewById(R.id.drawer_layout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +83,50 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this, ChannelActivity.class));
             }
         });
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mChannelListView.setAdapter(mListAdapter);
+        mSwipeRefreshLayout.post(new Runnable() {
+                                     @Override
+                                     public void run() {
+                                         mSwipeRefreshLayout.setRefreshing(true);
+                                         fetchChannels();
+                                         mSwipeRefreshLayout.setRefreshing(false);
+                                     }
+                                 }
+        );
+    }
+
+    private void fetchChannels() {
+        mChannels.clear();
+        mChannels.add(new Channel("KBS1",
+                            R.drawable.kbs1_logo,
+                            new Program("애국가" ,
+                                        "",
+                                        new Date(2016,2,4,0,0),
+                                        new Date(2016,2,4,0,1)),
+                            0));
+        mChannels.add(new Channel("KBS2",
+                R.drawable.kbs2_logo,
+                new Program("정오뉴스" ,
+                        "",
+                        new Date(2016,2,4,0,0),
+                        new Date(2016,2,4,0,1)),
+                0));
+        mChannels.add(new Channel("SBS",
+                R.drawable.sbs_logo,
+                new Program("런닝맨" ,
+                        "",
+                        new Date(2016,2,4,0,0),
+                        new Date(2016,2,4,0,1)),
+                0));
+        mChannels.add(new Channel("MBC",
+                R.drawable.mbc_logo,
+                new Program("그녀는 예뻤다" ,
+                        "",
+                        new Date(2016,2,4,0,0),
+                        new Date(2016,2,4,0,1)),
+                0));
+        mListAdapter.notifyDataSetChanged();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -116,5 +191,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        fetchChannels();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
