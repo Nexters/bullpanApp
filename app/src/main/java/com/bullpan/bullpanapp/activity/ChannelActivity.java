@@ -32,7 +32,11 @@ public class ChannelActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        
 //        findViewById(R.id.fragment).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
