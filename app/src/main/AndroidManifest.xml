@@ -6,10 +6,11 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!-- For Sendbird-->
+    <!-- For Sendbird -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,29 +20,31 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name_ko"
-            android:theme="@style/BullpanTheme.NoActionBar"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:theme="@style/BullpanTheme.NoActionBar" >
         </activity>
-        <activity android:name=".activity.StartActivity"
-                  android:theme="@style/Fullscreen"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activity.StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Fullscreen" >
         </activity>
         <activity
             android:name=".activity.SignInActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName=".activity.StartActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.StartActivity" />
         </activity>
-        <activity android:name=".activity.SplashActivity"
+        <activity
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/Fullscreen"
-                  android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,7 +52,7 @@
             android:name=".activity.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".activity.StartActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.StartActivity" />
@@ -58,8 +61,8 @@
             android:name=".activity.ChannelActivity"
             android:label="@string/title_activity_chat_room"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/BullpanTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/BullpanTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -68,14 +71,24 @@
             android:name=".activity.ChattingActivity"
             android:label="@string/title_activity_chatting"
             android:parentActivityName=".activity.ChannelActivity"
-            android:theme="@style/BullpanTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/BullpanTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-            android:value=".activity.ChannelActivity" />
+                android:value=".activity.ChannelActivity" />
         </activity>
-        <activity android:name=".activity.UserInfoActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activity.UserInfoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".activity.SendbirdSignInActivity"
+                  android:label="@string/title_activity_sendbird_sign_in"
+                  android:theme="@style/Fullscreen">
+        </activity>
+        <activity
+            android:name=".activity.SendbirdStartActivity"
+            android:label="@string/title_activity_sendbird_start"
+            android:theme="@style/Fullscreen">
         </activity>
     </application>
 
