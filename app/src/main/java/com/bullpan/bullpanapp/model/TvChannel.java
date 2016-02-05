@@ -6,15 +6,16 @@ import java.util.Locale;
 /**
  * Created by daehyun on 16. 2. 3..
  */
-public class Channel {
+public class TvChannel {
     private String name;
     private int logoImageId;
+    private String channelPrefix;
     private String currentProgramTitle;
     private String currentDuration;
     private int channelHitCount;
     private Program mCurrentProgram;
 
-    public Channel(String title, int logoImageId, Program currentProgram, int channelHitCount) {
+    public TvChannel(String title, int logoImageId, Program currentProgram, int channelHitCount) {
         this.name = title;
         this.logoImageId = logoImageId;
         mCurrentProgram = currentProgram;

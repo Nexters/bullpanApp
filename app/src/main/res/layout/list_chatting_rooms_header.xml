@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:text="오후:00"/>
+        android:text="오후1:00"/>
 
     <ImageView
         android:layout_width="100dp"

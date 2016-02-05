@@ -14,8 +14,9 @@ import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
-import com.bullpan.bullpanapp.model.Channel;
+import com.bullpan.bullpanapp.model.TvChannel;
 import com.bullpan.bullpanapp.model.Program;
+import com.sendbird.android.SendBird;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class ChannelActivity extends AppCompatActivity {
     private View mHeaderView;
     private ListView mChattingListView;
     private ChannelListAdapter mListAdapter;
-    private List<Channel> mChannels;
+    private List<TvChannel> mTvChannels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,32 +47,41 @@ public class ChannelActivity extends AppCompatActivity {
         initResource();
         initEvent();
         fetchChannels();
+        initSendBird(intent.getExtras());
 
     }
+    private void initSendBird(Bundle extras) {
+        String appKey = extras.getString("appKey");
+        String uuid = extras.getString("uuid");
+        String nickname = extras.getString("nickname");
+
+        SendBird.init(appKey);
+        SendBird.login(uuid, nickname);
+    }
     private void fetchChannels() {
-        mChannels.clear();
-        mChannels.add(new Channel("KBS1",
+        mTvChannels.clear();
+        mTvChannels.add(new TvChannel("kbs1",
                 R.drawable.kbs1_logo,
                 new Program("애국가",
                         "",
                         new Date(2016, 2, 4, 0, 0),
                         new Date(2016, 2, 4, 0, 1)),
                 0));
-        mChannels.add(new Channel("KBS2",
+        mTvChannels.add(new TvChannel("kbs2",
                 R.drawable.kbs2_logo,
                 new Program("정오뉴스",
                         "",
                         new Date(2016, 2, 4, 0, 0),
                         new Date(2016, 2, 4, 0, 1)),
                 0));
-        mChannels.add(new Channel("SBS",
+        mTvChannels.add(new TvChannel("sbs",
                 R.drawable.sbs_logo,
                 new Program("런닝맨",
                         "",
                         new Date(2016, 2, 4, 0, 0),
                         new Date(2016, 2, 4, 0, 1)),
                 0));
-        mChannels.add(new Channel("MBC",
+        mTvChannels.add(new TvChannel("mbc",
                 R.drawable.mbc_logo,
                 new Program("그녀는 예뻤다",
                         "",
@@ -82,10 +92,10 @@ public class ChannelActivity extends AppCompatActivity {
     }
     private void initResource() {
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        mHeaderView = LayoutInflater.from(this).inflate(R.layout.list_chattings_header, null);
+        mHeaderView = LayoutInflater.from(this).inflate(R.layout.list_chatting_rooms_header, null);
         mChattingListView = (ListView)findViewById(android.R.id.list);
-        mChannels = new ArrayList<Channel>();
-        mListAdapter = new ChannelListAdapter(this, mChannels);
+        mTvChannels = new ArrayList<TvChannel>();
+        mListAdapter = new ChannelListAdapter(this, mTvChannels);
         mChattingListView.setAdapter(mListAdapter);
 
         mChattingListView.addHeaderView(mHeaderView);

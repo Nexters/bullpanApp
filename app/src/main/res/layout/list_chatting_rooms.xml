@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
+        android:padding="24dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/relativeLayout"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chatting_room_image"
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/chatting_room_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/member_join_count_label"
+                    android:layout_below="@+id/chatting_room_image"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorRedAccent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:id="@+id/textView4"
+                    android:layout_alignTop="@+id/member_join_count_label"
+                    android:layout_toRightOf="@+id/member_join_count_label"
+                    android:layout_toEndOf="@+id/member_join_count_label"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorRedAccent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/member_total_count_label"
+                    android:layout_alignBottom="@+id/member_join_count_label"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_toRightOf="@+id/textView4"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorRedAccent"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:id="@+id/chatting_order_label"
+            android:layout_alignParentTop="true"
+            android:textSize="36sp"
+            android:layout_alignRight="@+id/textView11"
+            android:gravity="right"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorRedAccent"
+            android:textStyle="normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/chatting_order_label"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:textColor="@color/colorRedAccent"
+            android:text=">"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, id nulla massa pede sed porta vitae, pede lacus, ligula molestie, amet pulvinar ligula, vivamus pellentesque. Non amet nulla, non luctus elit ligula fringilla. Pretium ante turpis mi, mattis duis odio integer, et quam vehicula eu in mauris, etiam cras et in at nunc neque. Wisi tincidunt, tincidunt morbi libero faucibus, tincidunt tristique ut sem pellentesque ipsum felis, integer ullamcorper posuere eu vivamus sit, tincidunt rutrum sed montes dolor potenti fusce. Ultricies curabitur enim risus."
+            android:id="@+id/textView12"
+            android:maxLines="2"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignLeft="@+id/relativeLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            tools:text="한창달리고 있당앙"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView13"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:textColor="@color/colorRedAccent"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_toLeftOf="@+id/textView11"
+            android:layout_toStartOf="@+id/textView11"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

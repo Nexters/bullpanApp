@@ -10,19 +10,20 @@ import android.widget.TextView;
 
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.model.TvChannel;
+import com.sendbird.android.model.Channel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by daehyun on 16. 2. 3..
+ * Created by daehyun on 16. 2. 6..
  */
-public class ChannelListAdapter  extends BaseAdapter{
+public class ChattingListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<TvChannel> mTvChannelList = new ArrayList<>();
+    private List<Channel> mTvChannelList = new ArrayList<>();
 
-    public ChannelListAdapter(Context context, List<TvChannel> tvChannelList) {
+    public ChattingListAdapter(Context context, List<Channel> tvChannelList) {
         this.mContext = context;
         this.mTvChannelList = tvChannelList;
         this.mInflater =  LayoutInflater.from(context);
@@ -68,15 +69,15 @@ public class ChannelListAdapter  extends BaseAdapter{
         holder.programCount.setText(tvChannel.getChannelHitCount()+"");
         return convertView;
     }
-    public boolean add(TvChannel item) {
-       return this.mTvChannelList.add(item);
+    public boolean add(Channel item) {
+        return this.mTvChannelList.add(item);
     }
 
-    public boolean addAll(List<TvChannel> items) {
+    public boolean addAll(List<Channel> items) {
         return this.mTvChannelList.addAll(items);
     }
     public void clear(){
-         this.mTvChannelList.clear();
+        this.mTvChannelList.clear();
     }
     private static class ViewHolder {
         ImageView logoImage;

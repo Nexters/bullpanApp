@@ -20,7 +20,7 @@
     <string name="action_without_sign_in_short_ko">로그인 없이 시작하기</string>
     <string name="action_sendbird_start_short_ko">여기를 눌러 시작하기</string>
 
-
+    <string name="Lorem_ipsum">Lorem ipsum dolor sit amet, id nulla massa pede sed porta vitae, pede lacus, ligula molestie, amet pulvinar ligula, vivamus pellentesque. Non amet nulla, non luctus elit ligula fringilla. Pretium ante turpis mi, mattis duis odio integer, et quam vehicula eu in mauris, etiam cras et in at nunc neque. Wisi tincidunt, tincidunt morbi libero faucibus, tincidunt tristique ut sem pellentesque ipsum felis, integer ullamcorper posuere eu vivamus sit, tincidunt rutrum sed montes dolor potenti fusce. Ultricies curabitur enim risus.</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>

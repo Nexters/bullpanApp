@@ -21,8 +21,9 @@ import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
-import com.bullpan.bullpanapp.model.Channel;
+import com.bullpan.bullpanapp.model.TvChannel;
 import com.bullpan.bullpanapp.model.Program;
+import com.bullpan.bullpanapp.utils.SendbirdUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,15 +39,17 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     private ChannelListAdapter mListAdapter;
-    private List<Channel> mChannels;
+    private List<TvChannel> mTvChannels;
+
+    private final String appKey = SendbirdUtils.appKey;
+    String userID =SendbirdUtils.generateDeviceUUID(MainActivity.this);
+    String userName = SendbirdUtils.getUsername(MainActivity.this);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initResources();
         initEvents();
-
-
     }
 
     private void initResources() {
@@ -63,8 +66,8 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mChannelListView = (ListView) findViewById(android.R.id.list);
-        mChannels = new ArrayList<Channel>();
-        mListAdapter = new ChannelListAdapter(this, mChannels);
+        mTvChannels = new ArrayList<TvChannel>();
+        mListAdapter = new ChannelListAdapter(this, mTvChannels);
     }
 
     private void initEvents() {
@@ -92,38 +95,40 @@ public class MainActivity extends AppCompatActivity
         mChannelListView.setOnItemClickListener( new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Channel item  = (Channel) parent.getItemAtPosition(position);
+                TvChannel item  = (TvChannel) parent.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, ChannelActivity.class);
-                intent.putExtra("channelName", item.getName());
+                Bundle args = SendbirdUtils.makeSendBirdArgs(appKey,userID,userName);
+                args.putString("channelName", item.getName());
+                intent.putExtras(args);
                 startActivity(intent);
             }
         });
     }
 
     private void fetchChannels() {
-        mChannels.clear();
-        mChannels.add(new Channel("KBS1",
+        mTvChannels.clear();
+        mTvChannels.add(new TvChannel("KBS1",
                             R.drawable.kbs1_logo,
                             new Program("애국가" ,
                                         "",
                                         new Date(2016,2,4,0,0),
                                         new Date(2016,2,4,0,1)),
                             0));
-        mChannels.add(new Channel("KBS2",
+        mTvChannels.add(new TvChannel("KBS2",
                 R.drawable.kbs2_logo,
                 new Program("정오뉴스" ,
                         "",
                         new Date(2016,2,4,0,0),
                         new Date(2016,2,4,0,1)),
                 0));
-        mChannels.add(new Channel("SBS",
+        mTvChannels.add(new TvChannel("SBS",
                 R.drawable.sbs_logo,
                 new Program("런닝맨" ,
                         "",
                         new Date(2016,2,4,0,0),
                         new Date(2016,2,4,0,1)),
                 0));
-        mChannels.add(new Channel("MBC",
+        mTvChannels.add(new TvChannel("MBC",
                 R.drawable.mbc_logo,
                 new Program("그녀는 예뻤다" ,
                         "",
