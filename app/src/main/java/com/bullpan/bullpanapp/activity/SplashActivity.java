@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //        Log.d(TAG, getId());
         Handler handler = new Handler();
-/*** not using sendbird user model***/
+        /*** not using sendbird user model***/
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {

@@ -1,16 +1,19 @@
 package com.bullpan.bullpanapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.SyncStateContract;
+import android.view.inputmethod.InputMethodManager;
 
 import com.bullpan.bullpanapp.Constants;
 
 
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
 
 /**
  * Created by daehyun on 16. 2. 5..
@@ -63,6 +66,23 @@ public class SendbirdUtils {
         args.putString("uuid", uuid);
         args.putString("nickname", nickname);
         return args;
+    }
+
+    public static String readableFileSize(long size) {
+        if (size <= 0) return "0KB";
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+    public static void hideKeyboard(Activity activity) {
+        if (activity == null || activity.getCurrentFocus() == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
 }

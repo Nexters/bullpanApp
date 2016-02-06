@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChattingRoomListAdapter;
+import com.bullpan.bullpanapp.utils.SendbirdUtils;
 import com.sendbird.android.ChannelListQuery;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.model.Channel;
@@ -74,7 +76,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
                 @Override
                 public void onResult(Collection<Channel> channels) {
                     mListAdapter.addAll(channels);
-                    if(channels.size() <= 0) {
+                    if (channels.size() <= 0) {
                         Toast.makeText(ChannelActivity.this, "No channels were found.", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -129,7 +131,13 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
                         .setAction("Action", null).show();
             }
         });
-
+        mChattingRoomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Channel item = (Channel)parent.getItemAtPosition(position);
+                goToChattingActivity(item);
+            }
+        });
         mChattingRoomListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -153,6 +161,13 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
         });
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+    }
+
+    private void goToChattingActivity(Channel item) {
+        Intent data = new Intent(ChannelActivity.this, ChattingActivity.class);
+        Bundle bundle = SendbirdUtils.makeSendBirdArgs(appKey, uuid, nickname, item.getUrl());
+        data.putExtras(bundle);
+        startActivity(data);
     }
 
 
