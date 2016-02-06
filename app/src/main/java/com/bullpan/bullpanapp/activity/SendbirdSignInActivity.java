@@ -1,6 +1,7 @@
 package com.bullpan.bullpanapp.activity;
 
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,10 +29,12 @@ public class SendbirdSignInActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendbird_sign_in);
+
         mUserNameInput = (EditText) findViewById(R.id.user_name_input);
         mProfileSection = (RelativeLayout) findViewById(R.id.profile_section);
         mProfileImage = (ImageView) findViewById(R.id.img_profile);
@@ -91,4 +94,5 @@ public class SendbirdSignInActivity extends AppCompatActivity {
 
        return true;
     }
+
 }

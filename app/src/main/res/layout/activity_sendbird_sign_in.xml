@@ -82,6 +82,7 @@
             android:layout_marginRight="4dp"/>
     </RelativeLayout>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,5 +93,6 @@
         android:layout_alignStart="@+id/user_name_input"
         android:textColor="@color/colorRed"
         android:visibility="invisible"/>
+
 
 </RelativeLayout>

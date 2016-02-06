@@ -129,6 +129,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
                         .setAction("Action", null).show();
             }
         });
+
         mChattingRoomListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -151,6 +152,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(this);
+
     }
 
 
