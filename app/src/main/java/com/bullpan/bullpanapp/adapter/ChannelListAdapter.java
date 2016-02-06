@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by daehyun on 16. 2. 3..
  */
-public class ChannelListAdapter  extends BaseAdapter{
+public class ChannelListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<TvChannel> mTvChannelList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class ChannelListAdapter  extends BaseAdapter{
     public ChannelListAdapter(Context context, List<TvChannel> tvChannelList) {
         this.mContext = context;
         this.mTvChannelList = tvChannelList;
-        this.mInflater =  LayoutInflater.from(context);
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ChannelListAdapter  extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_channels, null);
             holder = new ViewHolder();
             holder.logoImage = (ImageView) convertView.findViewById(R.id.channel_logo_image);
@@ -55,7 +55,7 @@ public class ChannelListAdapter  extends BaseAdapter{
             holder.programCount = (TextView) convertView.findViewById(R.id.channel_count_label);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
         TvChannel tvChannel = (TvChannel) getItem(position);
 
@@ -65,19 +65,26 @@ public class ChannelListAdapter  extends BaseAdapter{
 //                .into(holder.logoImage);
         holder.programTitle.setText(tvChannel.getCurrentProgramTitle());
         holder.programDuartion.setText(tvChannel.getCurrentDuration());
-        holder.programCount.setText(tvChannel.getChannelHitCount()+"");
+        holder.programCount.setText(tvChannel.getChannelHitCount() + "");
         return convertView;
     }
-    public boolean add(TvChannel item) {
-       return this.mTvChannelList.add(item);
+
+    public void add(TvChannel item) {
+        this.mTvChannelList.add(item);
+        this.notifyDataSetChanged();
+
     }
 
-    public boolean addAll(List<TvChannel> items) {
-        return this.mTvChannelList.addAll(items);
+    public void addAll(List<TvChannel> items) {
+        this.mTvChannelList.addAll(items);
+        this.notifyDataSetChanged();
     }
-    public void clear(){
-         this.mTvChannelList.clear();
+
+    public void clear() {
+        this.mTvChannelList.clear();
+        this.notifyDataSetChanged();
     }
+
     private static class ViewHolder {
         ImageView logoImage;
         TextView programTitle;

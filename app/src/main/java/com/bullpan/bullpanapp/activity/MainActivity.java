@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
     private final String appKey = SendbirdUtils.appKey;
     String userID =SendbirdUtils.generateDeviceUUID(MainActivity.this);
-    String userName = SendbirdUtils.getUsername(MainActivity.this);
+    String userName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initResources() {
+        userName = SendbirdUtils.getUsername(MainActivity.this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 

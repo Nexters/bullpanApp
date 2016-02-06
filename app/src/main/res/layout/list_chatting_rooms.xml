@@ -21,8 +21,8 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:id="@+id/chatting_room_image"
                 android:src="@mipmap/ic_launcher"
                 android:layout_alignParentTop="true"
@@ -81,35 +81,34 @@
             android:layout_height="wrap_content"
             android:text="00"
             android:id="@+id/chatting_order_label"
-            android:layout_alignParentTop="true"
             android:textSize="36sp"
-            android:layout_alignRight="@+id/textView11"
             android:gravity="right"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="true"
             android:textColor="@color/colorRedAccent"
-            android:textStyle="normal"/>
+            android:textStyle="normal"
+            android:layout_alignTop="@+id/relativeLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView11"
-            android:layout_below="@+id/chatting_order_label"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:textSize="18sp"
             android:textStyle="normal"
             android:textColor="@color/colorRedAccent"
             android:text=">"
             android:paddingLeft="2dp"
-            android:paddingRight="2dp"/>
+            android:paddingRight="2dp"
+            android:layout_alignBaseline="@+id/chatting_room_title"
+            android:layout_alignBottom="@+id/chatting_room_title"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet, id nulla massa pede sed porta vitae, pede lacus, ligula molestie, amet pulvinar ligula, vivamus pellentesque. Non amet nulla, non luctus elit ligula fringilla. Pretium ante turpis mi, mattis duis odio integer, et quam vehicula eu in mauris, etiam cras et in at nunc neque. Wisi tincidunt, tincidunt morbi libero faucibus, tincidunt tristique ut sem pellentesque ipsum felis, integer ullamcorper posuere eu vivamus sit, tincidunt rutrum sed montes dolor potenti fusce. Ultricies curabitur enim risus."
-            android:id="@+id/textView12"
+            android:id="@+id/chatting_room_recent_message"
             android:maxLines="2"
             android:ellipsize="marquee"
             android:gravity="center"
@@ -128,13 +127,15 @@
             tools:text="한창달리고 있당앙"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView13"
+            android:id="@+id/chatting_room_title"
             android:textSize="18sp"
             android:textStyle="normal"
             android:textColor="@color/colorRedAccent"
-            android:layout_alignTop="@+id/textView11"
-            android:layout_toLeftOf="@+id/textView11"
-            android:layout_toStartOf="@+id/textView11"/>
+            android:layout_marginRight="11dp"
+            android:layout_marginEnd="11dp"
+            android:layout_below="@+id/chatting_order_label"
+            android:layout_alignRight="@+id/chatting_order_label"
+            android:layout_alignEnd="@+id/chatting_order_label"/>
 
     </RelativeLayout>
 
