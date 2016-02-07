@@ -2,6 +2,7 @@ package com.bullpan.bullpanapp.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
+    ImageButton btnUser;
     private ChannelListAdapter mListAdapter;
     private List<Channel> mChannels;
 
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         setupActionBar();
 
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,6 +69,16 @@ public class MainActivity extends AppCompatActivity
         mChannelListView = (ListView) findViewById(android.R.id.list);
         mChannels = new ArrayList<Channel>();
         mListAdapter = new ChannelListAdapter(this, mChannels);
+
+        btnUser = (ImageButton)findViewById(R.id.btnUserinfo);
+        btnUser.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+        public void onClick(View view)
+            {
+                startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
+            }
+        });
     }
 
     private void initEvents() {

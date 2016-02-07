@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar">
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -27,6 +27,17 @@
                 android:layout_gravity="center">
 
             </ImageView>
+
+            <ImageButton
+                android:id="@+id/btnUserinfo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:src="@drawable/user"
+                android:background="@color/colorWhite"
+                android:clickable="true"
+                android:longClickable="false"
+                android:scaleType="fitXY" />
             </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
