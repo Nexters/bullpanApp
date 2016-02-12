@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_logo"
                 android:layout_gravity="center">
 
             </ImageView>
@@ -33,7 +33,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="right"
-                android:src="@drawable/user"
+                android:src="@drawable/ic_my_page"
                 android:background="@color/colorWhite"
                 android:clickable="true"
                 android:longClickable="false"

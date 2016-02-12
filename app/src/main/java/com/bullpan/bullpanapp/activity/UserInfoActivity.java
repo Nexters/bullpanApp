@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bullpan.bullpanapp.MyPageFragment;
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
 import com.bullpan.bullpanapp.model.Channel;
@@ -100,7 +101,11 @@ public class UserInfoActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_user_info, container, false);
+//            fragment_user_info.xml 파일 빠져잇음.. git add해서 올려주세요.
+//            View rootView = inflater.inflate(R.layout.fragment_user_info, container, false);
+
+            View rootView = inflater.inflate(R.layout.fragment_mypage, container, false);
+
             //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -117,7 +122,7 @@ public class UserInfoActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return MyPageFragment.newInstance(position + 1);
         }
 
         @Override
