@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.bullpan.bullpanapp"
-        minSdkVersion 11
+        minSdkVersion 13
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -18,11 +18,14 @@ android {
         }
     }
 }
-
+repositories {
+    maven { url "https://raw.githubusercontent.com/smilefam/sendbird-android/master/" }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.sendbird.sdk:sendbird-android-sdk:2.0.1'
 }

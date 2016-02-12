@@ -1,13 +1,13 @@
 package com.bullpan.bullpanapp.activity;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,14 +17,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
-import com.bullpan.bullpanapp.model.Channel;
+import com.bullpan.bullpanapp.model.TvChannel;
 import com.bullpan.bullpanapp.model.Program;
+import com.bullpan.bullpanapp.utils.SendBirdUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,18 +43,21 @@ public class MainActivity extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     ImageButton btnUser;
     private ChannelListAdapter mListAdapter;
-    private List<Channel> mChannels;
+    private List<TvChannel> mTvChannels;
+
+    private final String appKey = SendBirdUtils.appKey;
+    String userID = SendBirdUtils.generateDeviceUUID(MainActivity.this);
+    String userName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initResources();
         initEvents();
-
-
     }
 
     private void initResources() {
+        userName = SendBirdUtils.getUsername(MainActivity.this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -67,8 +72,9 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mChannelListView = (ListView) findViewById(android.R.id.list);
-        mChannels = new ArrayList<Channel>();
-        mListAdapter = new ChannelListAdapter(this, mChannels);
+
+        mTvChannels = new ArrayList<TvChannel>();
+        mListAdapter = new ChannelListAdapter(this, mTvChannels);
 
         btnUser = (ImageButton)findViewById(R.id.btnUserinfo);
         btnUser.setOnClickListener(new View.OnClickListener()
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
             }
         });
+
     }
 
     private void initEvents() {
@@ -87,8 +94,24 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                drawer.openDrawer(navigationView);
+                SearchView sv = (SearchView) navigationView.findViewById(R.id.channelSearchView);
+                sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            if (imm != null) {
+                                imm.showSoftInput(v, 0);
+                            }
+
+                        }
+                    }
+                });
+                sv.requestFocusFromTouch();
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
         navigationView.setNavigationItemSelectedListener(this);
@@ -106,38 +129,40 @@ public class MainActivity extends AppCompatActivity
         mChannelListView.setOnItemClickListener( new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Channel item  = (Channel) parent.getItemAtPosition(position);
+                TvChannel item  = (TvChannel) parent.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, ChannelActivity.class);
-                intent.putExtra("channelName", item.getName());
+                Bundle args = SendBirdUtils.makeSendBirdArgs(appKey, userID, userName);
+                args.putString("channelName", item.getName());
+                intent.putExtras(args);
                 startActivity(intent);
             }
         });
     }
 
     private void fetchChannels() {
-        mChannels.clear();
-        mChannels.add(new Channel("KBS1",
+        mTvChannels.clear();
+        mTvChannels.add(new TvChannel("KBS1",
                             R.drawable.kbs1_logo,
                             new Program("애국가" ,
                                         "",
                                         new Date(2016,2,4,0,0),
                                         new Date(2016,2,4,0,1)),
                             0));
-        mChannels.add(new Channel("KBS2",
+        mTvChannels.add(new TvChannel("KBS2",
                 R.drawable.kbs2_logo,
                 new Program("정오뉴스" ,
                         "",
                         new Date(2016,2,4,0,0),
                         new Date(2016,2,4,0,1)),
                 0));
-        mChannels.add(new Channel("SBS",
+        mTvChannels.add(new TvChannel("SBS",
                 R.drawable.sbs_logo,
                 new Program("런닝맨" ,
                         "",
                         new Date(2016,2,4,0,0),
                         new Date(2016,2,4,0,1)),
                 0));
-        mChannels.add(new Channel("MBC",
+        mTvChannels.add(new TvChannel("MBC",
                 R.drawable.mbc_logo,
                 new Program("그녀는 예뻤다" ,
                         "",

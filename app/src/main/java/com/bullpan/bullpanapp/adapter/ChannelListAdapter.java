@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bullpan.bullpanapp.R;
-import com.bullpan.bullpanapp.model.Channel;
-import com.bullpan.bullpanapp.model.Program;
-import com.squareup.picasso.Picasso;
+import com.bullpan.bullpanapp.model.TvChannel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,25 +17,25 @@ import java.util.List;
 /**
  * Created by daehyun on 16. 2. 3..
  */
-public class ChannelListAdapter  extends BaseAdapter{
+public class ChannelListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<Channel> mChannelList = new ArrayList<>();
+    private List<TvChannel> mTvChannelList = new ArrayList<>();
 
-    public ChannelListAdapter(Context context, List<Channel> channelList) {
+    public ChannelListAdapter(Context context, List<TvChannel> tvChannelList) {
         this.mContext = context;
-        this.mChannelList = channelList;
-        this.mInflater =  LayoutInflater.from(context);
+        this.mTvChannelList = tvChannelList;
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return mChannelList.size();
+        return mTvChannelList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mChannelList.get(position);
+        return mTvChannelList.get(position);
     }
 
     @Override
@@ -48,7 +46,7 @@ public class ChannelListAdapter  extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_channels, null);
             holder = new ViewHolder();
             holder.logoImage = (ImageView) convertView.findViewById(R.id.channel_logo_image);
@@ -57,29 +55,36 @@ public class ChannelListAdapter  extends BaseAdapter{
             holder.programCount = (TextView) convertView.findViewById(R.id.channel_count_label);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        Channel channel = (Channel) getItem(position);
+        TvChannel tvChannel = (TvChannel) getItem(position);
 
-        holder.logoImage.setImageResource(channel.getLogoImageId());
+        holder.logoImage.setImageResource(tvChannel.getLogoImageId());
 //        Picasso.with(mContext)
 //                .load(channel.getLogoImageId())
 //                .into(holder.logoImage);
-        holder.programTitle.setText(channel.getCurrentProgramTitle());
-        holder.programDuartion.setText(channel.getCurrentDuration());
-        holder.programCount.setText(channel.getChannelHitCount()+"");
+        holder.programTitle.setText(tvChannel.getCurrentProgramTitle());
+        holder.programDuartion.setText(tvChannel.getCurrentDuration());
+        holder.programCount.setText(tvChannel.getChannelHitCount() + "");
         return convertView;
     }
-    public boolean add(Channel item) {
-       return this.mChannelList.add(item);
+
+    public void add(TvChannel item) {
+        this.mTvChannelList.add(item);
+        this.notifyDataSetChanged();
+
     }
 
-    public boolean addAll(List<Channel> items) {
-        return this.mChannelList.addAll(items);
+    public void addAll(List<TvChannel> items) {
+        this.mTvChannelList.addAll(items);
+        this.notifyDataSetChanged();
     }
-    public void clear(){
-         this.mChannelList.clear();
+
+    public void clear() {
+        this.mTvChannelList.clear();
+        this.notifyDataSetChanged();
     }
+
     private static class ViewHolder {
         ImageView logoImage;
         TextView programTitle;

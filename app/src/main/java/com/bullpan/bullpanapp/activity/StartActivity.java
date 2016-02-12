@@ -14,7 +14,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        findViewById(R.id.btn_sign_in).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StartActivity.this, SignInActivity.class));

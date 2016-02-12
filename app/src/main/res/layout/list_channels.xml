@@ -53,8 +53,6 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:id="@+id/channel_count_label"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorRedAccent"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"/>

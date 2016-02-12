@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.bullpan.bullpanapp.MyPageFragment;
 import com.bullpan.bullpanapp.R;
 import com.bullpan.bullpanapp.adapter.ChannelListAdapter;
-import com.bullpan.bullpanapp.model.Channel;
+import com.bullpan.bullpanapp.model.TvChannel;
 
 import java.util.ArrayList;
 
