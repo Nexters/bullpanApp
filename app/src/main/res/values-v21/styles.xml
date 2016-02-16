@@ -5,4 +5,19 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="BullpanTheme.NoActionBar" parent="BullpanTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:toolbarStyle">@style/Custom.Widget.toolbar</item>
+    </style>
+    <style name="Custom.Widget.toolbar" parent="Widget.AppCompat.Toolbar">
+        <!--<item name="android:paddingLeft">5dp</item>-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetLeft">0dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:navigationIcon">@drawable/ic_drawer_red</item>
+    </style>
+
 </resources>

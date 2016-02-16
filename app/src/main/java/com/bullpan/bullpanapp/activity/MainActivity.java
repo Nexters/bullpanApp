@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.SearchView;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.ic_drawer_red);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mChannelListView = (ListView) findViewById(android.R.id.list);
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         mListAdapter = new ChannelListAdapter(this, mTvChannels);
 
         btnUser = (ImageButton)findViewById(R.id.btnUserinfo);
+        btnUser.setVisibility(View.GONE);
         btnUser.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -90,6 +94,12 @@ public class MainActivity extends AppCompatActivity
 
     private void initEvents() {
         drawer.setDrawerListener(toggle);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.LEFT);
+            }
+        });
         toggle.syncState();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,8 +214,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_mypage) {
+            startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

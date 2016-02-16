@@ -13,7 +13,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <!--<item name="contentInsetStart">40dp</item>-->
+        <!--<item name="contentInsetEnd">40dp</item>-->
+        <!--<item name="android:paddingLeft">5dp</item>-->
+        <!--<item name="android:paddingRight">5dp</item>-->
+        </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
@@ -33,6 +38,7 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorRedAccent</item>
+        <item name="android:actionBarSize">67.67dp</item>
         <item name="android:windowBackground">@color/colorWhite</item>
         <item name="android:textColorPrimary">@color/colorBlack</item>
         <!--<item name="android:textColorSecondary">@color/colorBlack</item>-->
@@ -41,16 +47,24 @@
     <style name="BullpanTheme.NoActionBar" parent="BullpanTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="toolbarStyle">@style/Custom.Widget.toolbar</item>
     </style>
-
+    <style name="Custom.Widget.toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetLeft">0dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:navigationIcon">@drawable/ic_drawer_red</item>
+    </style>
     <style name="BullpanTheme.AppBar" parent="">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
-    <style name="BullpanTheme.AppBarOverlay" parent="BullpanTheme">
+    <style name="BullpanTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">?android:attr/textColorPrimary</item>
         <item name="searchViewStyle">@style/Widget.AppCompat.SearchView.ActionBar</item>
+        <!--<item name="android:paddingLeft">40dp</item>-->
     </style>
 
     <style name="BullpanTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
