@@ -9,6 +9,7 @@
     <color name="colorGrayAccent">#6C6C6C</color>
     <color name="colorBlack">#1C1C1C</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparent">#0000</color>
     <color name="primary_text_default_material_dark">#000000</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
 </resources>

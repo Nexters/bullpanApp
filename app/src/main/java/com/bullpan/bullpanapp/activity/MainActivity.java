@@ -36,7 +36,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,SwipeRefreshLayout.OnRefreshListener {
         SwipeRefreshLayout mSwipeRefreshLayout;
-    FloatingActionButton fab;
+    ImageButton fab;
     ListView mChannelListView;
     DrawerLayout drawer;
     Toolbar toolbar;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initResources() {
         userName = SendBirdUtils.getUsername(MainActivity.this);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (ImageButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //우선적으로 처리해야 함

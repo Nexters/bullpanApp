@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BullpanTheme.ActionBar" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/BullpanTheme.ActionBar.TextAppearance</item>
+        <item name="android:subtitleTextStyle">
+            @style/BullpanTheme.ActionBar.TextAppearance.SubTitle
+        </item>
+    </style>
+</resources>
