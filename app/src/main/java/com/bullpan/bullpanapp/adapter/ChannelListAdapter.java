@@ -66,7 +66,21 @@ public class ChannelListAdapter extends BaseAdapter {
         holder.programTitle.setText(tvChannel.getCurrentProgramTitle());
         holder.programDuartion.setText(tvChannel.getCurrentDuration());
         holder.programCount.setText(tvChannel.getChannelHitCount() + "");
+        changeCountLabelBackground(holder.programCount, tvChannel.getChannelHitCount());
         return convertView;
+    }
+
+    private void changeCountLabelBackground(TextView label, int count) {
+        if(count > 5) {
+            label.setBackgroundResource(R.drawable.bg_star);
+        }
+        else if (count > 0)
+        {
+            label.setBackgroundResource(R.drawable.bg_fire);
+        } else {
+            label.setBackgroundResource(R.drawable.bg_circle);
+        }
+
     }
 
     public void add(TvChannel item) {

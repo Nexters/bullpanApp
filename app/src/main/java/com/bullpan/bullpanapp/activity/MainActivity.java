@@ -151,33 +151,47 @@ public class MainActivity extends AppCompatActivity
 
     private void fetchChannels() {
         mTvChannels.clear();
-        mTvChannels.add(new TvChannel("KBS1",
-                            R.drawable.kbs1_logo,
-                            new Program("애국가" ,
-                                        "",
-                                        new Date(2016,2,4,0,0),
-                                        new Date(2016,2,4,0,1)),
-                            0));
-        mTvChannels.add(new TvChannel("KBS2",
-                R.drawable.kbs2_logo,
-                new Program("정오뉴스" ,
+        mTvChannels.add(new TvChannel("MBC",
+                R.drawable.mbc_logo,
+                new Program("그녀는 예뻣다 : 최종화",
                         "",
-                        new Date(2016,2,4,0,0),
-                        new Date(2016,2,4,0,1)),
+                        new Date(2016, 2, 4, 12, 0),
+                        new Date(2016, 2, 4, 13, 0)),
+                9));
+        mTvChannels.add(new TvChannel("JTBC",
+                R.drawable.jtbc_logo,
+                new Program("치즈인더트랩 : 2화" ,
+                        "",
+                        new Date(2016,2,4,12,0),
+                        new Date(2016,2,4,13,0)),
+                4));
+        mTvChannels.add(new TvChannel("TVN",
+                R.drawable.tvn_logo,
+                new Program("냉장고를 부탁해 : 23화" ,
+                        "",
+                        new Date(2016,2,4,12,0),
+                        new Date(2016,2,4,13,0)),
+                3));
+        mTvChannels.add(new TvChannel("CNTN",
+                R.drawable.cntn_logo,
+                new Program("바람의 화원 : 4화" ,
+                        "",
+                        new Date(2016,2,4,12,0),
+                        new Date(2016,2,4,13,0)),
                 0));
         mTvChannels.add(new TvChannel("SBS",
                 R.drawable.sbs_logo,
-                new Program("런닝맨" ,
+                new Program("꽃가족 : 1화 (첫방송)" ,
                         "",
-                        new Date(2016,2,4,0,0),
-                        new Date(2016,2,4,0,1)),
+                        new Date(2016,2,4,12,0),
+                        new Date(2016,2,4,13,0)),
                 0));
-        mTvChannels.add(new TvChannel("MBC",
-                R.drawable.mbc_logo,
-                new Program("그녀는 예뻤다" ,
+        mTvChannels.add(new TvChannel("KBS2",
+                R.drawable.kbs2_logo,
+                new Program("고양이를 부탁해 : 2화" ,
                         "",
-                        new Date(2016,2,4,0,0),
-                        new Date(2016,2,4,0,1)),
+                        new Date(2016,2,4,12,0),
+                        new Date(2016,2,4,13,0)),
                 0));
         mListAdapter.notifyDataSetChanged();
     }
