@@ -16,6 +16,8 @@ import android.os.Build.VERSION;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bullpan.bullpanapp.R;
@@ -53,6 +56,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private EditText mNicknameView;
+    private Button mUpButton;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -60,39 +65,40 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //우선적으로 처리해야 함
+        setSupportActionBar(toolbar);
         setupActionBar();
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.email_field);
         populateAutoComplete();
+        mPasswordView = (EditText) findViewById(R.id.password_field);
+        mNicknameView = (EditText) findViewById(R.id.nickname_field);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == getResources().getInteger(R.integer.login) || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+//        ImageButton mUpButton = (ImageButton) findViewById(R.id.btn_up);
+        Button mSignUpButton = (Button) findViewById(R.id.btn_sign_up);
+        Button mFacebookButton = (Button) findViewById(R.id.btn__facebook_sign_up);
+        mSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+            // attemptToSignUp();
                 attemptLogin();
+                //goto ParentActivity -> SignInActivity
+
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-        findViewById(R.id.email_sign_in_button).setOnClickListener(new OnClickListener() {
+        mFacebookButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+//                Intent intent = new Intent(Si)
             }
         });
+
+        mLoginFormView = findViewById(R.id.sign_up_form);
+        mProgressView = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
@@ -113,6 +119,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 

@@ -79,17 +79,6 @@ public class MainActivity extends AppCompatActivity
         mTvChannels = new ArrayList<TvChannel>();
         mListAdapter = new ChannelListAdapter(this, mTvChannels);
 
-        btnUser = (ImageButton)findViewById(R.id.btnUserinfo);
-        btnUser.setVisibility(View.GONE);
-        btnUser.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-        public void onClick(View view)
-            {
-                startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
-            }
-        });
-
     }
 
     private void initEvents() {

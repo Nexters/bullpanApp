@@ -11,5 +11,5 @@ public class Constants {
 
     public static final String KEY_USER_NAME = PACKAGE_NAME + ".USER_NAME";
 
-
+    public static final int SIGN_UP_SUCCESS = 555;
 }

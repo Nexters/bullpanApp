@@ -43,18 +43,22 @@
         <item name="colorAccent">@color/colorRedAccent</item>
         <item name="android:actionBarSize">67.67dp</item>
         <item name="android:windowBackground">@color/colorWhite</item>
-        <item name="android:textColorPrimary">@color/colorBlack</item>
+        <!--<item name="android:textColorPrimary">@color/colorBlack</item>-->
 
         <!-- Customize your theme here. -->
-        <item name="android:textViewStyle">@style/BullpanTheme.Widget.TextView</item>
+        <!--<item name="android:textViewStyle">@style/BullpanTheme.Widget.TextView</item>-->
         <!-- Action Bar Theme -->
         <item name="android:actionBarStyle">@style/BullpanTheme.ActionBar</item>
+
         <!--<item name="android:textColorSecondary">@color/colorBlack</item>-->
     </style>
 
     <style name="BullpanTheme.NoActionBar" parent="BullpanTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:colorControlNormal">#fff</item>
+        <item name="android:colorControlActivated">#fff</item>
+        <item name="android:colorControlHighlight">#fff</item>
         <item name="toolbarStyle">@style/Custom.Widget.toolbar</item>
 
     </style>
@@ -65,6 +69,7 @@
         <item name="android:paddingRight">5dp</item>
         <item name="android:navigationIcon">@drawable/ic_drawer_red</item>
     </style>
+
     <style name="BullpanTheme.AppBar" parent="">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -113,5 +118,18 @@
         <!-- Custom Attr-->
         <item name="fontPath">fonts/NotoSansKR-Regular-subset.otf</item>
         <item name="android:textColor">#444</item>
+    </style>
+    <!-- Custon EditText Style-->
+    <style name="EditText" parent ="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorControlNormal">#fff</item>
+        <item name="android:colorControlActivated">#fff</item>
+        <item name="android:colorControlHighlight">#fff</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorGrayTransparent</item>
+    </style>
+
+    <style name="HintText">
+        <item name= "android:textColor">@color/colorGrayTransparent</item>
     </style>
 </resources>

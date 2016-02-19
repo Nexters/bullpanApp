@@ -8,9 +8,9 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_password_confirmation">Retype your password</string>
+    <string name="prompt_email">이메일 아이디</string>
+    <string name="prompt_password">비밀번호</string>
+    <string name="prompt_password_confirmation">비밀번호를 다시 입력해주세요.</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_up_short">Sign Up</string>
     <string name="action_sign_up_short_ko">회원가입</string>

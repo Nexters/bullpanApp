@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                     gotoSendbirdStartActivity();
                 } else {
                     //회원정보가 있으면 Main으로 바로이동
-                    goToMainActivity();
+                    goToLoginActivity();
                 }
             }
         },2000);

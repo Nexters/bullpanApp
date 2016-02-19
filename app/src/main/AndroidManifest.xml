@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bullpan.bullpanapp">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.bullpan.bullpanapp">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <!-- For Sendbird -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -33,7 +35,8 @@
             android:name=".activity.SignInActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName=".activity.StartActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/EditText">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.StartActivity" />
@@ -53,10 +56,11 @@
             android:name=".activity.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".activity.StartActivity"
+            android:theme="@style/EditText"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.StartActivity" />
+                android:value=".activity.SignInActivity" />
         </activity>
         <activity
             android:name=".activity.ChannelActivity"

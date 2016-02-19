@@ -27,7 +27,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bullpan.bullpanapp.Constants;
 import com.bullpan.bullpanapp.R;
+import com.bullpan.bullpanapp.utils.SendBirdUtils;
+import com.sendbird.android.SendBird;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +63,9 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        setupActionBar();
+//        setupActionBar();
         // Set up the login form.
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
@@ -78,7 +82,8 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mSignUpButton = (Button) findViewById(R.id.btn_sign_up);
+         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -88,14 +93,26 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        findViewById(R.id.email_sign_in_button).setOnClickListener(new OnClickListener() {
+       mEmailSignInButton.setOnClickListener(new OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               //attemptLogin();
+//               gotoMainActivity();
+               Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+               startActivity(intent);
+           }
+       });
+        mSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                // start SignUpActivity
+                Intent intent =new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivityForResult(intent,200);
+
             }
         });
+        SendBirdUtils.hideKeyboard(this);
     }
 
     private void populateAutoComplete() {
@@ -116,6 +133,18 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Constants.SIGN_UP_SUCCESS) {
+            Bundle bundle = data.getExtras();
+            String email = bundle.getString("EMAIL");
+            mEmailView.setText(email);
+            mPasswordView.requestFocus();
+            SendBirdUtils.showKeyboard(this);
         }
     }
 
