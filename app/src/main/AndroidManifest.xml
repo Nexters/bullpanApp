@@ -92,7 +92,7 @@
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/BullpanTheme.Fullscreen">
+            android:theme="@style/BullpanTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />

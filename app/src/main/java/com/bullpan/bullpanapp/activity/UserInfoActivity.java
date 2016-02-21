@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,11 +29,11 @@ import com.bullpan.bullpanapp.model.TvChannel;
 
 import java.util.ArrayList;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class UserInfoActivity extends BaseActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-
+    ImageButton mUpButton;
     Toolbar toolbar;
 
 
@@ -45,13 +46,20 @@ public class UserInfoActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        mUpButton = (ImageButton) findViewById(R.id.btn_up);
+        mUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
-        tabLayout.setupWithViewPager(mViewPager);
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
+//        tabLayout.setupWithViewPager(mViewPager);
 
         initResources();
     }
@@ -62,7 +70,7 @@ public class UserInfoActivity extends AppCompatActivity {
         //우선적으로 처리해야 함
         setSupportActionBar(toolbar);
         setupActionBar();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -70,6 +78,7 @@ public class UserInfoActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
 
@@ -128,7 +137,7 @@ public class UserInfoActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 1;
         }
 
         @Override
@@ -136,8 +145,6 @@ public class UserInfoActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return "최근 채팅방";
-                case 1:
-                    return "즐겨찾기";
             }
             return null;
         }

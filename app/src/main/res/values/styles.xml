@@ -41,7 +41,7 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorRedAccent</item>
-        <item name="android:actionBarSize">67.67dp</item>
+        <item name="android:actionBarSize">75dp</item>
         <item name="android:windowBackground">@color/colorWhite</item>
         <!--<item name="android:textColorPrimary">@color/colorBlack</item>-->
 

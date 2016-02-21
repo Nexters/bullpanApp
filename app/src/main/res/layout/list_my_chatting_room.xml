@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
+        android:padding="0dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/relativeLayout"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="25.33dp"
+            android:layout_marginRight="27dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:id="@+id/linearLayout2"
+                android:layout_alignParentBottom="false"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                >
+
+                <ImageView
+                    tools:src="@drawable/kbs1_logo"
+                    android:layout_width="67.67dp"
+                    android:layout_height="67.67dp"
+                    android:id="@+id/chatroom_image"
+                    android:src="@drawable/kbs1_logo"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="40"
+                    android:id="@+id/member_join_count_label"
+                    android:layout_below="@+id/chatroom_image"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="normal"
+                    android:textColor="#f9544c"
+                    android:textSize="12.67dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_user_count"
+                    android:layout_marginTop="13.67dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="27.33dp"
+                android:layout_height="27.33dp"
+                android:id="@+id/chatroom_unread_count"
+                android:text="3"
+                android:gravity="center"
+                android:background="@drawable/bg_room_count"
+                android:textColor="#fff"
+                android:textSize="14.67dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/linearLayout2"
+                android:layout_marginRight="-8.33dp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chatroom_title"
+                android:textSize="21.33dp"
+                android:textStyle="normal"
+                android:textColor="#fa655e"
+                android:text="치즈인더트랩"
+                android:letterSpacing="-0.08"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/linearLayout2"
+                android:layout_toEndOf="@+id/chatroom_unread_count"
+                android:layout_marginLeft="29dp"
+                android:layout_marginStart="29dp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/last_message_label"
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:textColor="#525252"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rutrum sed velit ac suscipit. Curabitur et nisl posuere, pellentesque eros posuere, commodo ligula. Pellentesque fermentum tincidunt nunc, nec pellentesque lacus feugiat et. Cras sit amet risus lectus. Phasellus luctus quam in diam convallis tempor. Sed vitae sapien a ante molestie elementum. Cras vel purus at elit cursus dapibus a a quam. Morbi maximus risus a neque porttitor iaculis. Sed dictum est sed pellentesque mattis. Vestibulum at nisi orci."
+                android:letterSpacing="-0.06"
+                android:layout_below="@+id/chatroom_title"
+                android:layout_alignLeft="@+id/chatroom_title"
+                android:layout_alignStart="@+id/chatroom_title"
+                android:lines="2"
+                android:layout_marginTop="6.29dp"
+                android:ellipsize="marquee"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/last_message_timestamp_label"
+                android:textSize="14.33dp"
+                android:textStyle="normal"
+                android:textColor="#a3a3a3"
+                android:text="2016.02.15 오후6:40"
+                android:letterSpacing="-0.08"
+                android:layout_alignLeft="@+id/last_message_label"
+                android:layout_alignStart="@+id/last_message_label"
+                android:layout_alignBottom="@+id/linearLayout2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chatroom_id_label"
+                android:textSize="18.67dp"
+                android:textStyle="normal"
+                android:textColor="#fa655e"
+                android:text="02"
+                android:letterSpacing="-0.08"
+                android:layout_alignParentTop="true"
+                android:singleLine="true"
+                android:layout_alignParentRight="true"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="top"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.33dp"
+        android:background="#d6d6d6"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="22.67dp"
+        android:layout_marginRight="22.67dp"
+        android:layout_marginTop="28.33dp"/>
+
+</RelativeLayout>
