@@ -1,6 +1,7 @@
 package com.bullpan.bullpanapp.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,10 +28,11 @@ import java.util.Hashtable;
  */
 public class SendBirdChatAdapter extends BaseAdapter {
     private static final int TYPE_UNSUPPORTED = 0;
-    private static final int TYPE_MESSAGE = 1;
-    private static final int TYPE_SYSTEM_MESSAGE = 2;
-    private static final int TYPE_FILELINK = 3;
-    private static final int TYPE_BROADCAST_MESSAGE = 4;
+    private static final int TYPE_MESSAGE_FROM = 1;
+    private static final int TYPE_MESSAGE_TO = 2;
+    private static final int TYPE_SYSTEM_MESSAGE = 3;
+    private static final int TYPE_FILELINK = 4;
+    private static final int TYPE_BROADCAST_MESSAGE = 5;
 
     private static String TAG = "ys";
 
@@ -97,7 +99,10 @@ public class SendBirdChatAdapter extends BaseAdapter {
     public int getItemViewType(int position) {
         Object item = mItemList.get(position);
         if(item instanceof Message) {
-            return TYPE_MESSAGE;
+            if (((Message) item).getSenderName().toString().equals(getNickname()))
+                return TYPE_MESSAGE_TO;
+            else
+                return TYPE_MESSAGE_FROM;
         } else if(item instanceof FileLink) {
             return TYPE_FILELINK;
         } else if(item instanceof SystemMessage) {
@@ -111,27 +116,22 @@ public class SendBirdChatAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 5;
+        return 6;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         final Object item = getItem(position);
-        Boolean myChat= true;
-        Log.d(TAG, ""+position);
-        Log.d(TAG, this.getNickname());
-        Log.d(TAG, ((Message)item).getSenderName());
+        Boolean isChanged= false;
 
-        if(((Message)item).getSenderName()==this.getNickname()) {
-            myChat = true;
-        }
-        else {
-            myChat = false;
+        if(position>0) {
+            if ((((Message) item).getSenderName().toString()).equals((((Message) getItem(position - 1)).getSenderName()).toString()))
+                isChanged = false;
+            else isChanged = true;
         }
 
-        if(convertView == null || ((ViewHolder)convertView.getTag()).getViewType() != getItemViewType(position)) {
-            Log.d(TAG, position+"");
+        if(convertView == null || ((ViewHolder)convertView.getTag()).getViewType()!= getItemViewType(position)) {
             viewHolder = new ViewHolder();
             viewHolder.setViewType(getItemViewType(position));
 
@@ -140,25 +140,22 @@ public class SendBirdChatAdapter extends BaseAdapter {
                     convertView = new View(mInflater.getContext());
                     convertView.setTag(viewHolder);
                     break;
-                case TYPE_MESSAGE: {
-                    if(myChat)
-                    {
-                        convertView = mInflater.inflate(R.layout.view_message_to, parent, false);
-                        viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
-                        viewHolder.time = (TextView) convertView.findViewById(R.id.time);
-                        viewHolder.count = (TextView) convertView.findViewById(R.id.count);
-                    }
-                    else {
-                        convertView = mInflater.inflate(R.layout.view_message_from_name, parent, false);
-                        viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
-                        viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
-                        viewHolder.time = (TextView) convertView.findViewById(R.id.time);
-                        viewHolder.count = (TextView) convertView.findViewById(R.id.count);
-                        viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
-                    }
-                    //viewHolder.setView("txt_sender_name", userName);
-                    //viewHolder.setView("message", tv);
-                    //viewHolder.setView("img_op_icon", (ImageView)convertView.findViewById(R.id.userImg));
+                case TYPE_MESSAGE_FROM: {
+                    convertView = mInflater.inflate(R.layout.view_message_from_name, parent, false);
+                    viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
+                    viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
+                    viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                    viewHolder.count = (TextView) convertView.findViewById(R.id.count);
+                    viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
+                    convertView.setTag(viewHolder);
+                    break;
+                }
+                case TYPE_MESSAGE_TO:
+                {
+                    convertView = mInflater.inflate(R.layout.view_message_to, parent, false);
+                    viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
+                    viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                    viewHolder.count = (TextView) convertView.findViewById(R.id.count);
                     convertView.setTag(viewHolder);
                     break;
                 }
@@ -199,44 +196,36 @@ public class SendBirdChatAdapter extends BaseAdapter {
                 }
             }
         }
-
-
-        viewHolder = (ViewHolder) convertView.getTag();
+        else {
+            viewHolder = (ViewHolder)convertView.getTag();
+        }
 
         switch(getItemViewType(position)) {
             case TYPE_UNSUPPORTED:
                 break;
-            case TYPE_MESSAGE:
-                Message message = (Message)item;
-                if(myChat)  viewHolder.userName.setText(((Message) item).getSenderName());
+            case TYPE_MESSAGE_FROM:
+                viewHolder.userName.setText(((Message) item).getSenderName());
                 viewHolder.msg.setText(((Message) item).getMessage());
-
-
-//                viewHolder.getView("message").setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        new AlertDialog.Builder(mContext)
-//                                .setTitle("SendBird")
-//                                .setMessage("Do you want to start 1:1 messaging with " + ((Message) item).getSenderName() + "?")
-//                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        Intent data = new Intent();
-//                                        data.putExtra("userIds", new String[]{((Message) item).getSenderId()});
-//                                        setResult(RESULT_OK, data);
-//                                        mDoNotDisconnect = true;
-//                                        SendBirdChatActivity.this.finish();
-//                                    }
-//                                })
-//                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                    }
-//                                })
-//                                .create()
-//                                .show();
-//                    }
-//                });
+                if(position>0) {
+                    if (isChanged==false) {
+                        viewHolder.msg.setBackgroundResource(R.drawable.bg_chat_white_non);
+                        viewHolder.userImg.setVisibility(View.INVISIBLE);
+                        viewHolder.userName.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        viewHolder.msg.setBackgroundResource(R.drawable.bg_chat_white);
+                        viewHolder.userImg.setVisibility(View.VISIBLE);
+                        viewHolder.userName.setVisibility(View.VISIBLE);
+                    }
+                }
+                break;
+            case TYPE_MESSAGE_TO:
+                viewHolder.msg.setText(((Message) item).getMessage());
+                if(position>0) {
+                    if (isChanged==false) viewHolder.msg.setBackgroundResource(R.drawable.bg_chat_red_non);
+                    else viewHolder.msg.setBackgroundResource(R.drawable.bg_chat_red);
+                }
                 break;
             case TYPE_SYSTEM_MESSAGE:
                 SystemMessage systemMessage = (SystemMessage)item;

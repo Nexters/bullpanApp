@@ -1,6 +1,5 @@
 package com.bullpan.bullpanapp;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -9,11 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.bullpan.bullpanapp.dummy.DummyContent;
+import com.bullpan.bullpanapp.adapter.MyChatroomListAdapter;
+import com.sendbird.android.model.Channel;
+import com.sendbird.android.shadow.com.google.gson.Gson;
+import com.sendbird.android.shadow.com.google.gson.JsonElement;
+import com.sendbird.android.shadow.com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -37,8 +45,8 @@ public class MyPageFragment extends Fragment implements AbsListView.OnItemClickL
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
-
+    private MyChatroomListAdapter mAdapter;
+    List<Channel> mChatroomList;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,8 +60,12 @@ public class MyPageFragment extends Fragment implements AbsListView.OnItemClickL
 
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+//                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+
+        mChatroomList = new ArrayList<>();
+        mAdapter = new MyChatroomListAdapter(this.getActivity(),mChatroomList);
+
     }
 
     @Override
@@ -65,6 +77,18 @@ public class MyPageFragment extends Fragment implements AbsListView.OnItemClickL
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
+        JsonObject object= new JsonObject();
+        object.addProperty("id",0);
+        object.addProperty("member_count", 10);
+        object.addProperty("channel_url", "http://#");
+        object.addProperty("name", "Mychannel");
+        object.addProperty("created_at", new Date().getTime());
+        object.addProperty("cover_img_url", "http://#");
+
+        mAdapter.add(Channel.build(object));
+        mAdapter.add(Channel.build(object));
+        mAdapter.add(Channel.build(object));
+        mAdapter.add(Channel.build(object));
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 

@@ -31,12 +31,13 @@
                 app:contentInsetStart="0dp"
                 android:paddingRight="0dp">
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48.67dp"
+                    android:layout_height="48.67dp"
                     android:background="@color/colorTransparent"
                     android:src="@drawable/ic_back_white"
                     android:id="@+id/btn_up"
-                    android:visibility="gone"/>
+                    android:adjustViewBounds="true"
+                    android:visibility="visible"/>
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
                     android:layout_gravity="center"
                     android:textSize="20dp"
                     android:textColor="@color/colorWhite"
-                    android:gravity="center"></TextView>
+                    android:gravity="center"/>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
@@ -144,7 +145,7 @@
                     android:layout_height="39.67dp"
                     android:id="@+id/imageView3"
                     android:layout_above="@+id/btn__facebook_sign_up"
-                    android:background="@drawable/banner_sign_up_or_new"/>
+                    android:background="@drawable/banner_sign_up_or_nine"/>
 
                 <Button
                     style="?android:textAppearanceSmall"

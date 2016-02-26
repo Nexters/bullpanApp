@@ -24,7 +24,8 @@
         android:layout_alignBottom="@+id/message"
         android:layout_toLeftOf="@+id/message"
         android:layout_toStartOf="@+id/message"
-        android:paddingRight="7.67dp">
+        android:paddingRight="7.67dp"
+        android:id="@+id/linearLayout3">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,6 +47,24 @@
             android:layout_gravity="right" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userName"
+        android:layout_alignTop="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userImg"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/linearLayout3"
+        android:layout_toStartOf="@+id/linearLayout3"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
