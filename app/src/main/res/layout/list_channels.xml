@@ -41,7 +41,8 @@
             android:textColor="#a1a0a0"
             android:textIsSelectable="false"
             android:textSize="14.67dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:letterSpacing="-0.02"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
             android:layout_alignParentStart="true"
             android:textColor="#333333"
             android:textSize="20dp"
-            android:typeface="normal"/>
+            android:typeface="normal"
+            android:letterSpacing="-0.04"/>
 
     </RelativeLayout>
 

@@ -4,16 +4,16 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bullpan.bullpanapp.R;
@@ -27,10 +27,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class ChannelActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    private ImageButton fab;
     private View mHeaderView;
     private ListView mChattingRoomListView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -41,6 +41,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
     private String channelName;
     private String nickname;
     private String uuid;
+    private ImageButton mUpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,12 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
         channelName = intent.getStringExtra("channelName");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setPadding(0,0,0,0);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(channelName);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar();
+
+
+
 
         initSendBird(intent.getExtras());
         initResource();
@@ -107,12 +111,17 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
     }
 
     private void initResource() {
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        mUpBtn = (ImageButton) findViewById(R.id.btn_up);
+        fab = (ImageButton) findViewById(R.id.fab);
         mHeaderView = LayoutInflater.from(this).inflate(R.layout.list_chatting_rooms_header, null);
         mChattingRoomListView = (ListView)findViewById(android.R.id.list);
         mChannels = new ArrayList<Channel>();
         mListAdapter = new ChattingRoomListAdapter(this, mChannels);
         mChattingRoomListView.setAdapter(mListAdapter);
+
+        TextView programTitle = (TextView)mHeaderView.findViewById(R.id.program_title_label);
+//        programTitle.setIncludeFontPadding(false);
+
         mChattingRoomListView.addHeaderView(mHeaderView, null, false);
 //        mChattingRoomListView.setSelectionAfterHeaderView();
 
@@ -123,9 +132,18 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_red);
+
         }
     }
     private void initEvent() {
+        mUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

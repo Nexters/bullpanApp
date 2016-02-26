@@ -14,6 +14,10 @@ public class BaseApplication  extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/NotoSansKR-Regular-subset.otf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
     }
 }

@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private EditText mNicknameView;
-    private Button mUpButton;
+    private ImageButton mUpButton;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -76,7 +76,13 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         populateAutoComplete();
         mPasswordView = (EditText) findViewById(R.id.password_field);
         mNicknameView = (EditText) findViewById(R.id.nickname_field);
-
+        mUpButton = (ImageButton) findViewById(R.id.btn_up);
+        mUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 //        ImageButton mUpButton = (ImageButton) findViewById(R.id.btn_up);
         Button mSignUpButton = (Button) findViewById(R.id.btn_sign_up);
         Button mFacebookButton = (Button) findViewById(R.id.btn__facebook_sign_up);
@@ -118,8 +124,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private void setupActionBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
