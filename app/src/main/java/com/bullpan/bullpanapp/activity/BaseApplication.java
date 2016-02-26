@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.bullpan.bullpanapp.R;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 
 //import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
