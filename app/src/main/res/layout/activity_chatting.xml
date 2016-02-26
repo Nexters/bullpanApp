@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.bullpan.bullpanapp.activity.ChattingActivity">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+    <RelativeLayout
+        android:layout_height="48.67dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="11.33dp"
+            android:layout_height="23dp"
+            android:id="@+id/btn_back"
+            android:background="@drawable/btn_back"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="21dp"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_centerVertical="true"
+            android:enabled="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_name"
+            android:text="치즈인더트랩01"
+            android:textSize="20dp"
+            android:textColor="#fa655e"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignBottom="@+id/btn_export"
+            android:layout_centerInParent="true" />
+        <Button
+            android:layout_width="25.33dp"
+            android:layout_height="25.33dp"
+            android:id="@+id/btn_export"
+            android:background="@drawable/btn_export"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_marginRight="21dp"
+            android:layout_centerVertical="true"/>
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:popupTheme="@style/AppTheme.PopupOverlay"/>-->
 
-    <!--</android.support.design.widget.AppBarLayout>-->
+
+    </RelativeLayout>
 
     <include layout="@layout/content_chatting"/>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

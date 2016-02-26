@@ -5,7 +5,7 @@ import android.app.Application;
 import com.bullpan.bullpanapp.R;
 
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+//import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by daehyun on 16. 2. 16..

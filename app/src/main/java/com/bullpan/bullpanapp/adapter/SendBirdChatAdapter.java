@@ -2,6 +2,7 @@ package com.bullpan.bullpanapp.adapter;
 
 import android.content.Context;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.sendbird.android.model.Message;
 import com.sendbird.android.model.MessageModel;
 import com.sendbird.android.model.SystemMessage;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -30,6 +32,13 @@ public class SendBirdChatAdapter extends BaseAdapter {
     private static final int TYPE_FILELINK = 3;
     private static final int TYPE_BROADCAST_MESSAGE = 4;
 
+    private static String TAG = "ys";
+
+    public static String getNickname() {
+        return nickname;
+    }
+
+    private static String nickname = "";
     private final Context mContext;
     private final LayoutInflater mInflater;
     private final ArrayList<Object> mItemList;
@@ -110,7 +119,13 @@ public class SendBirdChatAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         final Object item = getItem(position);
 
+        if(((Message)item).getSenderName()==this.getNickname())
+        {
+
+        }
+
         if(convertView == null || ((ViewHolder)convertView.getTag()).getViewType() != getItemViewType(position)) {
+            Log.d(TAG, position+"");
             viewHolder = new ViewHolder();
             viewHolder.setViewType(getItemViewType(position));
 
@@ -120,12 +135,16 @@ public class SendBirdChatAdapter extends BaseAdapter {
                     convertView.setTag(viewHolder);
                     break;
                 case TYPE_MESSAGE: {
-                    TextView tv;
+                    convertView = mInflater.inflate(R.layout.view_message_from_name, parent, false);
+                    viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
+                    viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
+                    viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                    viewHolder.count = (TextView) convertView.findViewById(R.id.count);
+                    viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
 
-                    convertView = mInflater.inflate(R.layout.sendbird_view_message, parent, false);
-                    tv = (TextView) convertView.findViewById(R.id.txt_message);
-                    viewHolder.setView("message", tv);
-                    viewHolder.setView("img_op_icon", (ImageView)convertView.findViewById(R.id.img_op_icon));
+                    //viewHolder.setView("txt_sender_name", userName);
+                    //viewHolder.setView("message", tv);
+                    //viewHolder.setView("img_op_icon", (ImageView)convertView.findViewById(R.id.userImg));
                     convertView.setTag(viewHolder);
                     break;
                 }
@@ -169,18 +188,16 @@ public class SendBirdChatAdapter extends BaseAdapter {
 
 
         viewHolder = (ViewHolder) convertView.getTag();
+
         switch(getItemViewType(position)) {
             case TYPE_UNSUPPORTED:
                 break;
             case TYPE_MESSAGE:
                 Message message = (Message)item;
-                if(message.isOpMessage()) {
-                    viewHolder.getView("img_op_icon", ImageView.class).setVisibility(View.VISIBLE);
-                    viewHolder.getView("message", TextView.class).setText(Html.fromHtml("&nbsp;&nbsp;&nbsp;<font color='#824096'><b>" + message.getSenderName() + "</b></font>: " + message.getMessage()));
-                } else {
-                    viewHolder.getView("img_op_icon", ImageView.class).setVisibility(View.GONE);
-                    viewHolder.getView("message", TextView.class).setText(Html.fromHtml("<font color='#824096'><b>" + message.getSenderName() + "</b></font>: " + message.getMessage()));
-                }
+                viewHolder.userName.setText(((Message) item).getSenderName());
+                viewHolder.msg.setText(((Message) item).getMessage());
+
+
 //                viewHolder.getView("message").setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -294,9 +311,20 @@ public class SendBirdChatAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setNickName(String nickname) {
+        this.nickname = nickname;
+
+    }
+
     private class ViewHolder {
         private Hashtable<String, View> holder = new Hashtable<String, View>();
         private int type;
+
+        ImageView userImg;
+        TextView userName;
+        TextView msg;
+        TextView time;
+        TextView count;
 
         public int getViewType() {
             return this.type;

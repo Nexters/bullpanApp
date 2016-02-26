@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fceeee">
+
+    <ImageView
+        android:layout_width="50.67dp"
+        android:layout_height="50.67dp"
+        android:scaleType="fitXY"
+        android:id="@+id/userImg"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userImg"
+        android:id="@+id/linearLayout"
+        android:layout_marginLeft="2.33dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userName"
+            android:text="유정"
+            android:textSize="14.67dp"
+            android:textColor="#fa655e"
+            android:letterSpacing="-0.08"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="7.43dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            tools:text="홍블리 완전 핵귀욤"
+            android:id="@+id/message"
+            android:textSize="18dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#383838"
+            android:background="@drawable/bg_chat_white"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:paddingLeft="18.67dp"
+            android:paddingRight="12dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:paddingLeft="7.67dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24"
+            android:id="@+id/count"
+            android:textSize="12.67dp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="4.67dp"
+            android:textColor="#fa655e"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:textSize="12.67dp"
+            android:text="오후6:16"
+            android:layout_gravity="top"
+            android:textColor="#a1a0a0"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -36,7 +36,7 @@ public class TvChannel {
     }
 
     public String getCurrentProgramTitle() {
-         return mCurrentProgram.getTitle();
+        return mCurrentProgram.getTitle();
     }
     public String getCurrentDuration() {
 

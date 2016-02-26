@@ -1,6 +1,7 @@
 package com.bullpan.bullpanapp.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by daehyun on 16. 2. 3..
@@ -10,6 +11,7 @@ public class Program {
     private String programlInfo;
     private Date startTime;
     private Date endTime;
+    private List<Chatroom> chatrooms;
 
     public Program(String title, String programlInfo, Date startTime, Date endTime) {
         this.startTime = startTime;
@@ -50,5 +52,10 @@ public class Program {
         this.endTime = endTime;
     }
 
-
+    public void addChatroom(String name, int totalNumber)
+    {
+        Chatroom chatroom = new Chatroom(name, totalNumber);
+        chatroom.setProgram(this);
+        chatrooms.add(chatroom);
+    }
 }

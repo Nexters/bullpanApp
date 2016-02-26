@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +54,8 @@ import java.util.List;
 
 public class ChattingActivity extends AppCompatActivity {
 
+    public static final String TAG = "ys";
+
     private SendBirdChatFragment mSendBirdChatFragment;
     private SendBirdChatAdapter mSendBirdChatAdapter;
     private String uuid;
@@ -60,13 +63,17 @@ public class ChattingActivity extends AppCompatActivity {
     private String nickname;
     private String mChannelUrl;
 
-    private ImageButton mBtnClose;
-    private ImageButton mBtnSettings;
-    private TextView mTxtChannelUrl;
-    private View mTopBarContainer;
-    private View mSettingsContainer;
-    private Button mBtnLeave;
-    private boolean mDoNotDisconnect;
+    //private ImageButton mBtnClose;
+    //private ImageButton mBtnSettings;
+    //private TextView mTxtChannelUrl;
+    //private View mTopBarContainer;
+    //private View mSettingsContainer;
+    //private Button mBtnLeave;
+    //private boolean mDoNotDisconnect;
+
+    private Button mBtnBack;
+    private Button mBtnExport;
+    private TextView mTxtChannelName;
 
     private void initSendBird(Bundle extras) {
         appKey = extras.getString("appKey");
@@ -81,7 +88,7 @@ public class ChattingActivity extends AppCompatActivity {
         SendBird.setEventHandler(new SendBirdEventHandler() {
             @Override
             public void onConnect(Channel channel) {
-                mTxtChannelUrl.setText("#" + channel.getUrlWithoutAppPrefix());
+                mTxtChannelName.setText("#" + channel.getUrlWithoutAppPrefix());
             }
 
             @Override
@@ -117,6 +124,7 @@ public class ChattingActivity extends AppCompatActivity {
             public void onAllDataReceived(SendBird.SendBirdDataType type, int count) {
                 mSendBirdChatAdapter.notifyDataSetChanged();
                 mSendBirdChatFragment.mListView.setSelection(mSendBirdChatAdapter.getCount());
+
             }
 
             @Override
@@ -128,45 +136,58 @@ public class ChattingActivity extends AppCompatActivity {
 
             @Override
             public void onReadReceived(ReadStatus readStatus) {
+
             }
 
             @Override
             public void onTypeStartReceived(TypeStatus typeStatus) {
+
             }
 
             @Override
             public void onTypeEndReceived(TypeStatus typeStatus) {
+
             }
 
             @Override
             public void onMessagingStarted(MessagingChannel messagingChannel) {
+
             }
 
             @Override
             public void onMessagingUpdated(MessagingChannel messagingChannel) {
+
             }
 
             @Override
             public void onMessagingEnded(MessagingChannel messagingChannel) {
+
             }
 
             @Override
             public void onAllMessagingEnded() {
+
             }
 
             @Override
             public void onMessagingHidden(MessagingChannel messagingChannel) {
+
             }
 
             @Override
             public void onAllMessagingHidden() {
+
             }
 
         });
     }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //check
         setContentView(R.layout.activity_chatting);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -175,7 +196,7 @@ public class ChattingActivity extends AppCompatActivity {
 
         mSendBirdChatAdapter = new SendBirdChatAdapter(this);
         mSendBirdChatFragment.setSendBirdChatAdapter(mSendBirdChatAdapter);
-
+        mSendBirdChatAdapter.setNickName(nickname);
         mSendBirdChatFragment.setSendBirdChatHandler(new SendBirdChatFragment.SendBirdChatHandler() {
 
             @Override
@@ -187,7 +208,7 @@ public class ChattingActivity extends AppCompatActivity {
         });
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mSendBirdChatFragment)
+                .replace(R.id.frameLayout, mSendBirdChatFragment)
                 .commit();
         initUIComponents();
         initSendBird(getIntent().getExtras());
@@ -197,7 +218,6 @@ public class ChattingActivity extends AppCompatActivity {
                 for (MessageModel model : messageModels) {
                     mSendBirdChatAdapter.addMessageModel(model);
                 }
-
 
                 mSendBirdChatAdapter.notifyDataSetChanged();
                 mSendBirdChatFragment.mListView.setSelection(mSendBirdChatAdapter.getCount());
@@ -227,10 +247,8 @@ public class ChattingActivity extends AppCompatActivity {
         private ListView mListView;
         private SendBirdChatAdapter mAdapter;
         private EditText mEtxtMessage;
-        private Button mBtnSend;
-        private ImageButton mBtnChannel;
-        private ImageButton mBtnUpload;
-        private ProgressBar mProgressBtnUpload;
+        private ImageButton mBtnSendOn;
+        private ImageButton mBtnSendOff;
         private SendBirdChatHandler mHandler;
 
         public static interface SendBirdChatHandler {
@@ -247,7 +265,7 @@ public class ChattingActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.sendbird_fragment_chat, container, false);
+            View rootView = inflater.inflate(R.layout.content_chatting, container, false);
             initUIComponents(rootView);
             return rootView;
         }
@@ -255,17 +273,20 @@ public class ChattingActivity extends AppCompatActivity {
 
         private void initUIComponents(View rootView) {
             mListView = (ListView)rootView.findViewById(R.id.list);
-            turnOffListViewDecoration(mListView);
+            //turnOffListViewDecoration(mListView);
             mListView.setAdapter(mAdapter);
 
-            mBtnChannel = (ImageButton)rootView.findViewById(R.id.btn_channel);
-            mBtnSend = (Button)rootView.findViewById(R.id.btn_send);
-            mBtnUpload = (ImageButton)rootView.findViewById(R.id.btn_upload);
-            mProgressBtnUpload = (ProgressBar)rootView.findViewById(R.id.progress_btn_upload);
-            mEtxtMessage = (EditText)rootView.findViewById(R.id.etxt_message);
+            mBtnSendOn = (ImageButton)rootView.findViewById(R.id.btn_send_on);
+            mBtnSendOff = (ImageButton)rootView.findViewById(R.id.btn_send_off);
+            mEtxtMessage = (EditText)rootView.findViewById(R.id.msg);
 
-            mBtnSend.setEnabled(false);
-            mBtnSend.setOnClickListener(new View.OnClickListener() {
+            mBtnSendOff.setEnabled(true);
+            mBtnSendOn.setEnabled(true);
+
+            mBtnSendOn.setVisibility(View.INVISIBLE);
+            mBtnSendOff.setVisibility(View.VISIBLE);
+
+            mBtnSendOn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     send();
@@ -273,6 +294,7 @@ public class ChattingActivity extends AppCompatActivity {
             });
 
 
+            /*
             mBtnChannel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -281,6 +303,7 @@ public class ChattingActivity extends AppCompatActivity {
                     }
                 }
             });
+
 
             mBtnUpload.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -291,12 +314,12 @@ public class ChattingActivity extends AppCompatActivity {
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_PICK_IMAGE);
                 }
             });
-
+*/
             mEtxtMessage.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if(keyCode == KeyEvent.KEYCODE_ENTER) {
-                        if(event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        if (event.getAction() == KeyEvent.ACTION_DOWN) {
                             send();
                         }
                         return true; // Do not hide keyboard.
@@ -318,25 +341,32 @@ public class ChattingActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    mBtnSend.setEnabled(s.length() > 0);
+                    if (s.length() > 0) {
+                        mBtnSendOn.setVisibility(View.VISIBLE);
+                        mBtnSendOff.setVisibility(View.INVISIBLE);
+                    } else {
+                        mBtnSendOn.setVisibility(View.INVISIBLE);
+                        mBtnSendOff.setVisibility(View.VISIBLE);
+
+                    }
                 }
             });
             mListView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    SendBirdUtils.hideKeyboard(getActivity());
+                    //SendBirdUtils.hideKeyboard(getActivity());
                     return false;
                 }
             });
             mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    if(scrollState == SCROLL_STATE_IDLE) {
-                        if(view.getFirstVisiblePosition() == 0 && view.getChildCount() > 0 && view.getChildAt(0).getTop() == 0) {
+                    if (scrollState == SCROLL_STATE_IDLE) {
+                        if (view.getFirstVisiblePosition() == 0 && view.getChildCount() > 0 && view.getChildAt(0).getTop() == 0) {
                             SendBird.queryMessageList(SendBird.getChannelUrl()).prev(mAdapter.getMinMessageTimestamp(), 30, new MessageListQuery.MessageListQueryResult() {
                                 @Override
                                 public void onResult(List<MessageModel> messageModels) {
-                                    for(MessageModel model : messageModels) {
+                                    for (MessageModel model : messageModels) {
                                         mAdapter.addMessageModel(model);
                                     }
 
@@ -357,7 +387,7 @@ public class ChattingActivity extends AppCompatActivity {
                 }
             });
         }
-
+        /*
         private void showUploadProgress(boolean tf) {
             if(tf) {
                 mBtnUpload.setEnabled(false);
@@ -369,7 +399,10 @@ public class ChattingActivity extends AppCompatActivity {
                 mProgressBtnUpload.setVisibility(View.GONE);
             }
         }
+        */
 
+        //얘 뭐하는거징
+        /*
         private void turnOffListViewDecoration(ListView listView) {
             listView.setDivider(null);
             listView.setDividerHeight(0);
@@ -380,13 +413,13 @@ public class ChattingActivity extends AppCompatActivity {
             listView.setSelector(new ColorDrawable(0x00ffffff));
             listView.setCacheColorHint(0x00000000); // For Gingerbread scrolling bug fix
         }
-
+        */
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             if(resultCode == Activity.RESULT_OK) {
-                if(requestCode == REQUEST_PICK_IMAGE && data != null && data.getData() != null) {
-                    upload(data.getData());
-                }
+                //if(requestCode == REQUEST_PICK_IMAGE && data != null && data.getData() != null) {
+                //    upload(data.getData());
+                //}
             }
         }
 
@@ -399,6 +432,7 @@ public class ChattingActivity extends AppCompatActivity {
             }
         }
 
+        /*
         private void upload(Uri uri) {
             try {
                 Cursor cursor = getActivity().getContentResolver().query(uri,
@@ -438,7 +472,7 @@ public class ChattingActivity extends AppCompatActivity {
                 Toast.makeText(getActivity(), "Fail to upload the file.", Toast.LENGTH_LONG).show();
             }
         }
-
+        */
 
         public void setSendBirdChatAdapter(SendBirdChatAdapter adapter) {
             mAdapter = adapter;
@@ -447,7 +481,24 @@ public class ChattingActivity extends AppCompatActivity {
             }
         }
     }
+
+
     private void initUIComponents() {
+        mBtnBack = (Button)findViewById(R.id.btn_back);
+        mBtnExport = (Button)findViewById(R.id.btn_export);
+        mTxtChannelName = (TextView)findViewById(R.id.tv_name);
+
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendBird.leave(SendBird.getChannelUrl());
+                finish();
+                //startActivity(new Intent(ChattingActivity.this, ChannelActivity.class));
+            }
+        });
+
+
+        /*
         mTopBarContainer = findViewById(R.id.top_bar_container);
         mTxtChannelUrl = (TextView)findViewById(R.id.txt_channel_url);
 
@@ -485,9 +536,12 @@ public class ChattingActivity extends AppCompatActivity {
                 }
             }
         });
-        resizeMenubar();
+        */
+        //resizeMenubar();
     }
 
+
+    /*
     private void resizeMenubar() {
         ViewGroup.LayoutParams lp = mTopBarContainer.getLayoutParams();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -497,6 +551,8 @@ public class ChattingActivity extends AppCompatActivity {
         }
         mTopBarContainer.setLayoutParams(lp);
     }
+*/
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -504,4 +560,6 @@ public class ChattingActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
+
+
 }

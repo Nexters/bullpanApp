@@ -69,6 +69,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
         SendBird.init(appKey);
         SendBird.login(uuid, nickname);
     }
+
     private void fetchChattingRooms() {
         mListAdapter.clear();
         mChannelListQuery =  SendBird.queryChannelList("_"+channelName);
@@ -87,6 +88,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
                 }
             });
     }
+
     private void loadMoreChattingRooms() {
         if(mChannelListQuery != null && mChannelListQuery.hasNext() && !mChannelListQuery.isLoading()) {
             mChannelListQuery.next(new ChannelListQuery.ChannelListQueryResult() {
@@ -131,6 +133,7 @@ public class ChannelActivity extends AppCompatActivity implements SwipeRefreshLa
                         .setAction("Action", null).show();
             }
         });
+
         mChattingRoomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
