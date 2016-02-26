@@ -192,8 +192,14 @@ public class ChattingActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mSendBirdChatFragment = new SendBirdChatFragment();
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, mSendBirdChatFragment)
+                .commit();
+        initUIComponents();
+        initSendBird(getIntent().getExtras());
+
+        mSendBirdChatFragment = new SendBirdChatFragment();
         mSendBirdChatAdapter = new SendBirdChatAdapter(this);
         mSendBirdChatFragment.setSendBirdChatAdapter(mSendBirdChatAdapter);
         mSendBirdChatAdapter.setNickName(nickname);
@@ -207,11 +213,7 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, mSendBirdChatFragment)
-                .commit();
-        initUIComponents();
-        initSendBird(getIntent().getExtras());
+
         SendBird.queryMessageList(mChannelUrl).prev(Long.MAX_VALUE, 50, new MessageListQuery.MessageListQueryResult() {
             @Override
             public void onResult(List<MessageModel> messageModels) {

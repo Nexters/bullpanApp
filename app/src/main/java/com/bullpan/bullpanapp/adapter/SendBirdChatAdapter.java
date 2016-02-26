@@ -118,10 +118,16 @@ public class SendBirdChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         final Object item = getItem(position);
+        Boolean myChat= true;
+        Log.d(TAG, ""+position);
+        Log.d(TAG, this.getNickname());
+        Log.d(TAG, ((Message)item).getSenderName());
 
-        if(((Message)item).getSenderName()==this.getNickname())
-        {
-
+        if(((Message)item).getSenderName()==this.getNickname()) {
+            myChat = true;
+        }
+        else {
+            myChat = false;
         }
 
         if(convertView == null || ((ViewHolder)convertView.getTag()).getViewType() != getItemViewType(position)) {
@@ -135,13 +141,21 @@ public class SendBirdChatAdapter extends BaseAdapter {
                     convertView.setTag(viewHolder);
                     break;
                 case TYPE_MESSAGE: {
-                    convertView = mInflater.inflate(R.layout.view_message_from_name, parent, false);
-                    viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
-                    viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
-                    viewHolder.time = (TextView) convertView.findViewById(R.id.time);
-                    viewHolder.count = (TextView) convertView.findViewById(R.id.count);
-                    viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
-
+                    if(myChat)
+                    {
+                        convertView = mInflater.inflate(R.layout.view_message_to, parent, false);
+                        viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
+                        viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                        viewHolder.count = (TextView) convertView.findViewById(R.id.count);
+                    }
+                    else {
+                        convertView = mInflater.inflate(R.layout.view_message_from_name, parent, false);
+                        viewHolder.msg = (TextView) convertView.findViewById(R.id.message);
+                        viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
+                        viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                        viewHolder.count = (TextView) convertView.findViewById(R.id.count);
+                        viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
+                    }
                     //viewHolder.setView("txt_sender_name", userName);
                     //viewHolder.setView("message", tv);
                     //viewHolder.setView("img_op_icon", (ImageView)convertView.findViewById(R.id.userImg));
@@ -194,7 +208,7 @@ public class SendBirdChatAdapter extends BaseAdapter {
                 break;
             case TYPE_MESSAGE:
                 Message message = (Message)item;
-                viewHolder.userName.setText(((Message) item).getSenderName());
+                if(myChat)  viewHolder.userName.setText(((Message) item).getSenderName());
                 viewHolder.msg.setText(((Message) item).getMessage());
 
 

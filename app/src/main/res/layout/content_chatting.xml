@@ -14,7 +14,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="6.67dp"
         android:paddingBottom="15.33dp"
-        android:backgroundTint="#ffdcdc">
+        android:background="#fceeee">
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"

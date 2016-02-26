@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#fceeee">
+    tools:background="#fceeee">
 
     <ImageView
         android:layout_width="50.67dp"
@@ -36,7 +36,6 @@
             tools:text="홍블리 완전 핵귀욤"
             android:id="@+id/message"
             android:textSize="18dp"
-
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
