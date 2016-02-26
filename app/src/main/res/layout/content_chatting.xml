@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#fceeee"
-        >
+        android:background="#fceeee">
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
@@ -22,7 +21,9 @@
             android:background="#fceeee"
             android:paddingTop="18.33dp"
             android:paddingBottom="15.33dp"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            android:clickable="false"
+            >
         </ListView>
     </FrameLayout>
 
@@ -32,6 +33,13 @@
         android:layout_height="55.97dp"
         android:layout_alignParentBottom="true"
         >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#feb9b5"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
         <ImageButton
             android:layout_width="22.33dp"
             android:layout_height="22.33dp"

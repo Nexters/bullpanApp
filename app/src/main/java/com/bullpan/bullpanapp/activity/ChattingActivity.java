@@ -192,16 +192,17 @@ public class ChattingActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initSendBird(getIntent().getExtras());
         initFragment();
         initUIComponents();
+
         SendBird.queryMessageList(mChannelUrl).prev(Long.MAX_VALUE, 50, new MessageListQuery.MessageListQueryResult() {
             @Override
             public void onResult(List<MessageModel> messageModels) {
                 for (MessageModel model : messageModels) {
                     mSendBirdChatAdapter.addMessageModel(model);
                 }
-
                 mSendBirdChatAdapter.notifyDataSetChanged();
                 mSendBirdChatFragment.mListView.setSelection(mSendBirdChatAdapter.getCount());
                 SendBird.join(mChannelUrl);
@@ -443,8 +444,7 @@ public class ChattingActivity extends AppCompatActivity {
                                     for (MessageModel model : messageModels) {
                                         mAdapter.addMessageModel(model);
                                     }
-
-                                    mAdapter.notifyDataSetChanged();
+                                    //mAdapter.notifyDataSetChanged();
                                     mListView.setSelection(messageModels.size());
                                 }
 
@@ -504,6 +504,7 @@ public class ChattingActivity extends AppCompatActivity {
             if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 SendBirdUtils.hideKeyboard(getActivity());
             }
+            mAdapter.notifyDataSetChanged();
         }
 
         /*
