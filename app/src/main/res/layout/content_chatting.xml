@@ -11,14 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingLeft="8dp"
-        android:paddingRight="6.67dp"
-        android:paddingBottom="15.33dp"
-        android:backgroundTint="#ffdcdc">
+        android:background="#fceeee"
+        >
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            android:background="#fceeee"
+            android:paddingTop="18.33dp"
+            android:paddingBottom="15.33dp"
+            android:clipToPadding="false">
         </ListView>
     </FrameLayout>
 

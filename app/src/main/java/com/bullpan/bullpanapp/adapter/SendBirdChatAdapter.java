@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bullpan.bullpanapp.R;
@@ -141,7 +144,7 @@ public class SendBirdChatAdapter extends BaseAdapter {
                     viewHolder.time = (TextView) convertView.findViewById(R.id.time);
                     viewHolder.count = (TextView) convertView.findViewById(R.id.count);
                     viewHolder.userImg = (ImageView) convertView.findViewById(R.id.userImg);
-
+                    viewHolder.layoutWrapper = (RelativeLayout) convertView.findViewById(R.id.wrapper);
                     //viewHolder.setView("txt_sender_name", userName);
                     //viewHolder.setView("message", tv);
                     //viewHolder.setView("img_op_icon", (ImageView)convertView.findViewById(R.id.userImg));
@@ -196,7 +199,34 @@ public class SendBirdChatAdapter extends BaseAdapter {
                 Message message = (Message)item;
                 viewHolder.userName.setText(((Message) item).getSenderName());
                 viewHolder.msg.setText(((Message) item).getMessage());
+                float paddingTop = 0;
+                if(position != 0 && position != this.getCount())
+                switch(position%3) {
+                    //case 1 : 내가쓴글과 다른사람 A의 쓴글 사이의 간격일때 -> 윗 마진이 25이다
+                    //case 2 : 같은사람(나 또는 다른사람)이 쓴글이 연속될때 //  -> 윗마진이 4일때
+                    //case 3 : 다른사람 A가 쓴글 다음에 타인 B가 쓴글이 올때 이 연속될때 -> 윗마진이 18일때
+                    case 0:
+                        paddingTop = SendBirdUtils.convertDpToPixel(25, mContext);
+                        break;
+                    case 1:
+                        paddingTop = SendBirdUtils.convertDpToPixel(4, mContext);
+                        break;
+                    case 2:
+                        paddingTop = SendBirdUtils.convertDpToPixel(18, mContext);
+                        break;
 
+                }
+                viewHolder.layoutWrapper.setPadding(0,(int)paddingTop,0,0);
+
+
+
+
+
+//                if(position==1) {
+//                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) convertView.getLayoutParams();
+//                    params.setMargins(params.leftMargin, params.topMargin + 18, params.rightMargin, params.bottomMargin );
+//                    convertView.setLayoutParams(params);
+//                }
 
 //                viewHolder.getView("message").setOnClickListener(new View.OnClickListener() {
 //                    @Override
@@ -325,6 +355,7 @@ public class SendBirdChatAdapter extends BaseAdapter {
         TextView msg;
         TextView time;
         TextView count;
+        RelativeLayout layoutWrapper;
 
         public int getViewType() {
             return this.type;
