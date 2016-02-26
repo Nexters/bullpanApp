@@ -47,8 +47,23 @@
 
 
     </RelativeLayout>
-
-    <include layout="@layout/content_chatting"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/sendbird_img_bg_default"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--/>-->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f0f1f2"
+            />
+    </FrameLayout>
 
 
 </LinearLayout>

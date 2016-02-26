@@ -192,26 +192,9 @@ public class ChattingActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mSendBirdChatFragment = new SendBirdChatFragment();
-
-        mSendBirdChatAdapter = new SendBirdChatAdapter(this);
-        mSendBirdChatFragment.setSendBirdChatAdapter(mSendBirdChatAdapter);
-        mSendBirdChatAdapter.setNickName(nickname);
-        mSendBirdChatFragment.setSendBirdChatHandler(new SendBirdChatFragment.SendBirdChatHandler() {
-
-            @Override
-            public void onChannelListClicked() {
-//                Intent intent = new Intent(SendBirdChatActivity.this, SendBirdChannelListActivity.class);
-//                intent.putExtras(getIntent().getExtras());
-//                startActivityForResult(intent, REQUEST_CHANNEL_LIST);
-            }
-        });
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, mSendBirdChatFragment)
-                .commit();
-        initUIComponents();
         initSendBird(getIntent().getExtras());
+        initFragment();
+        initUIComponents();
         SendBird.queryMessageList(mChannelUrl).prev(Long.MAX_VALUE, 50, new MessageListQuery.MessageListQueryResult() {
             @Override
             public void onResult(List<MessageModel> messageModels) {
@@ -241,6 +224,96 @@ public class ChattingActivity extends AppCompatActivity {
 //        });
 
     }
+
+    private void initFragment() {
+        mSendBirdChatFragment = new SendBirdChatFragment();
+        mSendBirdChatAdapter = new SendBirdChatAdapter(this);
+        mSendBirdChatAdapter.setNickName(nickname);
+        mSendBirdChatFragment.setSendBirdChatAdapter(mSendBirdChatAdapter);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, mSendBirdChatFragment)
+                .commit();
+    }
+
+    private void initUIComponents() {
+        mBtnBack = (Button)findViewById(R.id.btn_back);
+        mBtnExport = (Button)findViewById(R.id.btn_export);
+        mTxtChannelName = (TextView)findViewById(R.id.tv_name);
+
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendBird.leave(SendBird.getChannelUrl());
+                finish();
+                //startActivity(new Intent(ChattingActivity.this, ChannelActivity.class));
+            }
+        });
+
+
+        /*
+        mTopBarContainer = findViewById(R.id.top_bar_container);
+        mTxtChannelUrl = (TextView)findViewById(R.id.txt_channel_url);
+
+        mSettingsContainer = findViewById(R.id.settings_container);
+        mSettingsContainer.setVisibility(View.GONE);
+
+        mBtnLeave = (Button)findViewById(R.id.btn_leave);
+
+        mBtnLeave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSettingsContainer.setVisibility(View.GONE);
+                SendBird.leave(SendBird.getChannelUrl());
+                finish();
+            }
+        });
+
+        mBtnClose = (ImageButton)findViewById(R.id.btn_close);
+        mBtnSettings = (ImageButton)findViewById(R.id.btn_settings);
+
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mBtnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mSettingsContainer.getVisibility() != View.VISIBLE) {
+                    mSettingsContainer.setVisibility(View.VISIBLE);
+                } else {
+                    mSettingsContainer.setVisibility(View.GONE);
+                }
+            }
+        });
+        */
+        //resizeMenubar();
+    }
+
+
+    /*
+    private void resizeMenubar() {
+        ViewGroup.LayoutParams lp = mTopBarContainer.getLayoutParams();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lp.height = (int) (28 * getResources().getDisplayMetrics().density);
+        } else {
+            lp.height = (int) (48 * getResources().getDisplayMetrics().density);
+        }
+        mTopBarContainer.setLayoutParams(lp);
+    }
+*/
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setupActionBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            // Show the Up button in the action bar.
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
+
+
     public static class SendBirdChatFragment extends Fragment {
         private static final int REQUEST_PICK_IMAGE = 100;
 
@@ -344,11 +417,12 @@ public class ChattingActivity extends AppCompatActivity {
                     if (s.length() > 0) {
                         mBtnSendOn.setVisibility(View.VISIBLE);
                         mBtnSendOff.setVisibility(View.INVISIBLE);
+
                     } else {
                         mBtnSendOn.setVisibility(View.INVISIBLE);
                         mBtnSendOff.setVisibility(View.VISIBLE);
-
                     }
+                    Log.d("afterTextChanged", s.toString());
                 }
             });
             mListView.setOnTouchListener(new View.OnTouchListener() {
@@ -482,84 +556,6 @@ public class ChattingActivity extends AppCompatActivity {
         }
     }
 
-
-    private void initUIComponents() {
-        mBtnBack = (Button)findViewById(R.id.btn_back);
-        mBtnExport = (Button)findViewById(R.id.btn_export);
-        mTxtChannelName = (TextView)findViewById(R.id.tv_name);
-
-        mBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SendBird.leave(SendBird.getChannelUrl());
-                finish();
-                //startActivity(new Intent(ChattingActivity.this, ChannelActivity.class));
-            }
-        });
-
-
-        /*
-        mTopBarContainer = findViewById(R.id.top_bar_container);
-        mTxtChannelUrl = (TextView)findViewById(R.id.txt_channel_url);
-
-        mSettingsContainer = findViewById(R.id.settings_container);
-        mSettingsContainer.setVisibility(View.GONE);
-
-        mBtnLeave = (Button)findViewById(R.id.btn_leave);
-
-        mBtnLeave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSettingsContainer.setVisibility(View.GONE);
-                SendBird.leave(SendBird.getChannelUrl());
-                finish();
-            }
-        });
-
-        mBtnClose = (ImageButton)findViewById(R.id.btn_close);
-        mBtnSettings = (ImageButton)findViewById(R.id.btn_settings);
-
-        mBtnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        mBtnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mSettingsContainer.getVisibility() != View.VISIBLE) {
-                    mSettingsContainer.setVisibility(View.VISIBLE);
-                } else {
-                    mSettingsContainer.setVisibility(View.GONE);
-                }
-            }
-        });
-        */
-        //resizeMenubar();
-    }
-
-
-    /*
-    private void resizeMenubar() {
-        ViewGroup.LayoutParams lp = mTopBarContainer.getLayoutParams();
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            lp.height = (int) (28 * getResources().getDisplayMetrics().density);
-        } else {
-            lp.height = (int) (48 * getResources().getDisplayMetrics().density);
-        }
-        mTopBarContainer.setLayoutParams(lp);
-    }
-*/
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-    }
 
 
 }
